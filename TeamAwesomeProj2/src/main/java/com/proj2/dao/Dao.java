@@ -16,7 +16,7 @@ public interface Dao {
 	public void logOut(String username);
 	
 	// CREATE methods
-	public void insertUser(User usr, String password) throws SQLException;
+	public void insertUser(String usr, String password, String privalages) throws SQLException;
 	
 	// READ methods
 	public User getUser(String username) throws SQLException, PrivilegesNotFoundException, UserNotFoundException; 

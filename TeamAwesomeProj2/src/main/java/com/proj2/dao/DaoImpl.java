@@ -1,9 +1,11 @@
 package com.proj2.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,33 @@ import com.proj2.util.JDBSCConnectionUtil;
 
 public class DaoImpl implements Dao {
 
+	//left it as returning zero because it does not have an out parameter in the database or else it would look 
+	//like the commented out code. 
 	public int authenticateLogIn(String username, String password) {
-		// TODO Auto-generated method stub
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			
+//			String sql = "call authenticate_login(?,?)";
+//			CallableStatement ps = conn.prepareCall(sql);
+//			ps.setString(1, username);
+//			ps.setString(2, password);
+//			ps.registerOutParameter(3, Types.NUMERIC);
+//			ps.executeUpdate();
+//			
+//			return ps.getInt(3);
+			
+			String sql = "EXEC authenticate_login(?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -25,12 +52,45 @@ public class DaoImpl implements Dao {
 		
 	}
 
-	public void insertUser(User usr, String password) throws SQLException {
-		
+	//changed to String instead of User object.
+	public void insertUser(String usr, String password, String privaleges) throws SQLException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "EXEC ta_insert_user(?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, usr);
+			ps.setString(2, password);
+			ps.setString(3, privaleges);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();		}
 	}
+	
 
 	public User getUser(String username) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
-		// TODO Auto-generated method stub
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			String sql = "Select * from ta_user WHERE ta_user_username = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
+			ResultSet results = stmt.executeQuery();
+			while(results.next()) {
+				
+				return new User(
+						results.getInt("TA_USER_ID"),
+						results.getString("TA_USER_USERNAME"),
+						results.getString("TA_USER_PRIVILEGES"),
+						results.getString("TA_USER_EMAIL"));
+			}	
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();
+		}
+		System.out.println("returned null in getUser call");
 		return null;
 	}
 
@@ -57,13 +117,25 @@ public class DaoImpl implements Dao {
 			return allUsers;
 			
 		}catch(SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
 			e.printStackTrace();
 		}
 		return new ArrayList<>();
 	}
 
 	public void deleteUser(String username) throws SQLException {
-		// TODO Auto-generated method stub
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "EXEC ta_user_delete(?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();		}
 	}
 
 }
