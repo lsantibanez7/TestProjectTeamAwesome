@@ -4,10 +4,11 @@ public class User {
 	
 	private int id; 
 	private String username;
-	private Privileges privileges; 
+	//private Privileges privileges; 
+	private String privileges;
 	private String email; 
 	
-	public User(int id, String username, Privileges privileges, String email) {
+	public User(int id, String username, String privileges, String email) {
 		super();
 		this.id = id;  
 		this.username = username;
@@ -35,11 +36,19 @@ public class User {
 		this.username = username;
 	}
 
-	public Privileges getPrivileges() {
+//	public Privileges getPrivileges() {
+//		return privileges; 
+//	}
+//	
+//	public void setPrivileges(Privileges privileges) {
+//		this.privileges = privileges; 
+//	}
+	
+	public String getPrivileges() {
 		return privileges; 
 	}
 	
-	public void setPrivileges(Privileges privileges) {
+	public void setPrivileges(String privileges) {
 		this.privileges = privileges; 
 	}
 
@@ -56,8 +65,12 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", privileges=" + privileges + ", email=" + email + "]";
 	}
 	
+//	public String toStringF() {
+//		return (wordFit((id+""), 5) + wordFit(username, 9) + " " + wordFit(privileges.name(), 10) + " " + wordFit(email, 50));  
+//	}
+	
 	public String toStringF() {
-		return (wordFit((id+""), 5) + wordFit(username, 9) + " " + wordFit(privileges.name(), 10) + " " + wordFit(email, 50));  
+		return (wordFit((id+""), 5) + wordFit(username, 9) + " " + wordFit(privileges, 10) + " " + wordFit(email, 50));  
 	}
 	
 	private String wordFit(String word, int len) {
