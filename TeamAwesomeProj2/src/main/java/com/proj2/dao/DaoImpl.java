@@ -23,7 +23,7 @@ public class DaoImpl implements Dao {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			
-//			String sql = "call authenticate_login(?,?)";
+//			String sql = "call authenticate_login(?,?,?)";
 //			CallableStatement ps = conn.prepareCall(sql);
 //			ps.setString(1, username);
 //			ps.setString(2, password);
