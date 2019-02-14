@@ -12,7 +12,8 @@ import com.proj2.model.User;
 public interface Dao {
 	
 	// ACCESS methods
-	public int authenticateLogIn(String username, String password); 
+	public int authenticateLogIn(String username, String password);
+	//public User logIn(String username, String password); 
 	public void logOut(String username);
 	
 	// CREATE methods

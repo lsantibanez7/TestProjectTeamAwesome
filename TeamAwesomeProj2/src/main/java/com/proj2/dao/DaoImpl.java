@@ -21,24 +21,24 @@ public class DaoImpl implements Dao {
 	//like the commented out code. 
 	public int authenticateLogIn(String username, String password) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			System.out.println("Tryna authenticate..");
 			
-			
-//			String sql = "call authenticate_login(?,?,?)";
-//			CallableStatement ps = conn.prepareCall(sql);
-//			ps.setString(1, username);
-//			ps.setString(2, password);
-//			ps.registerOutParameter(3, Types.NUMERIC);
-//			ps.executeUpdate();
-//			
-//			return ps.getInt(3);
-			
-			String sql = "EXEC authenticate_login(?,?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			
+			String sql = "{? = call authenticate_login(?,?)}";
+			CallableStatement ps = conn.prepareCall(sql);
+			ps.setString(2, username);
+			ps.setString(3, password);
+			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
 			
+			return ps.getInt(1);
+			
+//			String sql = "EXEC authenticate_login(?,?)";
+//			PreparedStatement ps = conn.prepareStatement(sql);
+//			ps.setString(1, username);
+//			ps.setString(2, password);
+//			
+//			ps.executeUpdate();
+//			
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
@@ -46,6 +46,38 @@ public class DaoImpl implements Dao {
 		}
 		return 0;
 	}
+//	
+//	public User logIn(String username, String password) {
+//		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+//			System.out.println("Tryna authenticate..");
+//			
+//			String sql = "call ta_user_login(?,?,?,?,?,?)";
+//			CallableStatement ps = conn.prepareCall(sql);
+//			ps.setString(1, username);
+//			ps.setString(2, password);
+//			ps.registerOutParameter(3, Types.NUMERIC);
+//			ps.registerOutParameter(4, Types.NUMERIC);
+//			ps.registerOutParameter(5, Types.NUMERIC);
+//			ps.registerOutParameter(6, Types.NUMERIC);
+//			ps.executeUpdate();
+//			
+//			return ps.getInt(1);
+//			
+////			String sql = "EXEC authenticate_login(?,?)";
+////			PreparedStatement ps = conn.prepareStatement(sql);
+////			ps.setString(1, username);
+////			ps.setString(2, password);
+////			
+////			ps.executeUpdate();
+////			
+//		} catch (SQLException e) {
+//			e.getSQLState();
+//			e.getErrorCode();
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+//	
 
 	public void logOut(String username) {
 		// TODO Auto-generated method stub
@@ -55,13 +87,15 @@ public class DaoImpl implements Dao {
 	//changed to String instead of User object.
 	public void insertUser(String usr, String password, String privaleges) throws SQLException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "EXEC ta_insert_user(?,?,?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, usr);
-			ps.setString(2, password);
-			ps.setString(3, privaleges);
+			String sql = "{? = call ta_insert_user(?,?,?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setString(2, usr);
+			cs.setString(3, password);
+			cs.setString(4, privaleges);
 			
-			ps.executeUpdate();
+			cs.registerOutParameter(1, Types.NUMERIC);
+			
+			cs.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.getSQLState();
