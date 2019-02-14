@@ -1,6 +1,5 @@
 package com.proj2.util;
 
-//import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -54,8 +53,8 @@ public class JDBSCConnectionUtil {
 			url = prop.getProperty("url");
 			connectionUser = prop.getProperty("connectionUser");
 			connectionPass = prop.getProperty("connectionPass");
-			superUsername = prop.getProperty("superUsername");
-			superPass = prop.getProperty("superPass");
+			//superUsername = prop.getProperty("superUsername");
+			//superPass = prop.getProperty("superPass");
 			
 		} catch (IOException ex) {
 			ex.printStackTrace();
