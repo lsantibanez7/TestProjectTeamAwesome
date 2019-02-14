@@ -1,11 +1,12 @@
-package com.revature.dao;
+package com.proj2.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.exception.PrivilegesNotFoundException;
-import com.revature.exception.UserNotFoundException;
-import com.revature.model.User;
+import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.UserNotFoundException;
+import com.proj2.model.User;
+
 
 
 public interface Dao {

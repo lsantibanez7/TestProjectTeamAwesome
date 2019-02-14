@@ -1,11 +1,12 @@
-package com.revature.dao;
+package com.proj2.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.exception.PrivilegesNotFoundException;
-import com.revature.exception.UserNotFoundException;
-import com.revature.model.User;
+import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.UserNotFoundException;
+import com.proj2.model.User;
+
 
 public class DaoImpl implements Dao {
 
@@ -21,7 +22,6 @@ public class DaoImpl implements Dao {
 
 	public void insertUser(User usr, String password) throws SQLException {
 		
-		return false;
 	}
 
 	public User getUser(String username) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
@@ -34,9 +34,8 @@ public class DaoImpl implements Dao {
 		return null;
 	}
 
-	public boolean deleteUser(String username) throws SQLException {
+	public void deleteUser(String username) throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.revature.model;
+package com.proj2.model;
 
 public class User {
 	

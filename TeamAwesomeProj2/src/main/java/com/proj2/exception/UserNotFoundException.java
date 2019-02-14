@@ -1,4 +1,4 @@
-package com.revature.exception;
+package com.proj2.exception;
 
 public class UserNotFoundException extends Exception{
 
