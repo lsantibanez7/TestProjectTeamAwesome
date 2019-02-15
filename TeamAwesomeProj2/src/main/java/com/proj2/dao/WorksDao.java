@@ -1,5 +1,7 @@
 package com.proj2.dao;
 
+import com.proj2.model.Works;
+
 public interface WorksDao {
 
 	// CREATE methods
