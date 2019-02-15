@@ -2,8 +2,8 @@ package com.proj2.util;
 
 import java.sql.SQLException;
 
-import com.proj2.dao.UserDao;
-import com.proj2.dao.UserDaoImpl;
+import com.proj2.dao.Dao;
+import com.proj2.dao.DaoImpl;
 import com.proj2.model.Privileges;
 import com.proj2.model.User;
 
@@ -11,7 +11,7 @@ public class Debug {
 	
 	
 	public static void main(String[] args) {
-		UserDao myDao = new UserDaoImpl(); 
+		Dao myDao = new DaoImpl(); 
 		User user1 = new User(0, "test-user-java4", "GUEST", null);
 		User user2 = new User(0, "test-user-java5", "GUEST", null);
 		User user3 = new User(0, "test-user-java6", "GUEST", null);
