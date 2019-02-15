@@ -16,9 +16,20 @@ import com.proj2.util.JDBSCConnectionUtil;
 
 
 public class UserDaoImpl implements UserDao {
+<<<<<<< HEAD:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
+=======
+	
+	private static UserDaoImpl usDa;
+	
+	public static UserDaoImpl getUsDa() {
+		if(usDa == null) {
+			usDa = new UserDaoImpl();
+		}
+		
+		return usDa;
+	}
+>>>>>>> 60f649db49e09bc717f1272084f902345bfdff29:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
 
-	//left it as returning zero because it does not have an out parameter in the database or else it would look 
-	//like the commented out code. 
 	public int authenticateLogIn(String username, String password) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "{? = call authenticate_login(?,?)}";
@@ -27,7 +38,14 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(3, password);
 			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
+<<<<<<< HEAD:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
 			return ps.getInt(1);			
+=======
+			
+			return ps.getInt(1);
+			
+
+>>>>>>> 60f649db49e09bc717f1272084f902345bfdff29:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
@@ -35,38 +53,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return 0;
 	}
-//	
-//	public User logIn(String username, String password) {
-//		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-//			System.out.println("Tryna authenticate..");
-//			
-//			String sql = "call ta_user_login(?,?,?,?,?,?)";
-//			CallableStatement ps = conn.prepareCall(sql);
-//			ps.setString(1, username);
-//			ps.setString(2, password);
-//			ps.registerOutParameter(3, Types.NUMERIC);
-//			ps.registerOutParameter(4, Types.NUMERIC);
-//			ps.registerOutParameter(5, Types.NUMERIC);
-//			ps.registerOutParameter(6, Types.NUMERIC);
-//			ps.executeUpdate();
-//			
-//			return ps.getInt(1);
-//			
-////			String sql = "EXEC authenticate_login(?,?)";
-////			PreparedStatement ps = conn.prepareStatement(sql);
-////			ps.setString(1, username);
-////			ps.setString(2, password);
-////			
-////			ps.executeUpdate();
-////			
-//		} catch (SQLException e) {
-//			e.getSQLState();
-//			e.getErrorCode();
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
-//	
+
 
 	public void logOut(String username) {
 		// TODO Auto-generated method stub
