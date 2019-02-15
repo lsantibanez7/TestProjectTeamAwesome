@@ -15,7 +15,7 @@ import com.proj2.model.User;
 import com.proj2.util.JDBSCConnectionUtil;
 
 
-public class DaoImpl implements Dao {
+public class UserDaoImpl implements UserDao {
 
 	//left it as returning zero because it does not have an out parameter in the database or else it would look 
 	//like the commented out code. 

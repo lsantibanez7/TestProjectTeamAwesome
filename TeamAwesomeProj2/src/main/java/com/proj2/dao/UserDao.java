@@ -9,7 +9,7 @@ import com.proj2.model.User;
 
 
 
-public interface Dao {
+public interface UserDao {
 	
 	// ACCESS methods
 	public int authenticateLogIn(String username, String password);
