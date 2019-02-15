@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-5">
+    </div>
+    <button class="btn btn-info col-md-auto" (click)="toggle()">Show Artworks</button>
+    <div class="col-md-5">
+    </div>
+  </div>
+</div>
+<div class="col-md-12" *ngIf="isHidden">
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="zeroImage">
+        <div class="card-body">
+          <h5> {{ zeroTitle }} </h5>
+          <p>Done by: {{ zeroCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="firstImage">
+        <div class="card-body">
+          <h5> {{ firstTitle }} </h5>
+          <p>Done by: {{ firstCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="secondImage">
+        <div class="card-body">
+          <h5> {{ secondTitle }} </h5>
+          <p>Done by: {{ secondCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="thirdImage">
+        <div class="card-body">
+          <h5> {{ thirdTitle }} </h5>
+          <p>Done by: {{ thirdCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="fourthImage">
+        <div class="card-body">
+          <h5> {{ fourthTitle }} </h5>
+          <p>Done by: {{ fourthCreator }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="fifthImage">
+        <div class="card-body">
+          <h5> {{ fifthTitle }} </h5>
+          <p>Done by: {{ fifthCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="sixImage">
+        <div class="card-body">
+          <h5> {{ sixTitle }} </h5>
+          <p>Done by: {{ sixCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="sevenImage">
+        <div class="card-body">
+          <h5> {{ sevenTitle }} </h5>
+          <p>Done by: {{ sevenCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="eightImage">
+        <div class="card-body">
+          <h5> {{ eightTitle }} </h5>
+          <p>Done by: {{ eightCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img class="card-img-top" [src]="nineImage">
+        <div class="card-body">
+          <h5> {{ nineTitle }} </h5>
+          <p>Done by: {{ nineCreator }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
