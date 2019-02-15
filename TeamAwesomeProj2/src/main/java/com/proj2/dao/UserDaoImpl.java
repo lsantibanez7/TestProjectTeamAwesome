@@ -16,8 +16,6 @@ import com.proj2.util.JDBSCConnectionUtil;
 
 
 public class UserDaoImpl implements UserDao {
-<<<<<<< HEAD:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
-=======
 	
 	private static UserDaoImpl usDa;
 	
@@ -28,7 +26,6 @@ public class UserDaoImpl implements UserDao {
 		
 		return usDa;
 	}
->>>>>>> 60f649db49e09bc717f1272084f902345bfdff29:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
 
 	public int authenticateLogIn(String username, String password) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
@@ -38,14 +35,9 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(3, password);
 			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
-<<<<<<< HEAD:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
-			return ps.getInt(1);			
-=======
-			
 			return ps.getInt(1);
 			
 
->>>>>>> 60f649db49e09bc717f1272084f902345bfdff29:TeamAwesomeProj2/src/main/java/com/proj2/dao/UserDaoImpl.java
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();

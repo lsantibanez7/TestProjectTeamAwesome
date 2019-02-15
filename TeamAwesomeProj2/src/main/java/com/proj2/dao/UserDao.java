@@ -14,7 +14,6 @@ public interface UserDao {
 	// ACCESS methods
 	public int authenticateLogIn(String username, String password);
 	//public User logIn(String username, String password); 
-	public void logOut(String username);
 	
 	// CREATE methods
 	public void insertUser(String usr, String password, String privalages) throws SQLException;
