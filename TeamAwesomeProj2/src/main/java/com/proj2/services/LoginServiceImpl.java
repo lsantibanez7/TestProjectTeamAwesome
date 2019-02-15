@@ -1,12 +1,13 @@
 package com.proj2.services;
 
-import java.io.IOException;
+import java.sql.SQLException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.proj2.dao.UserDao;
+import com.proj2.dao.UserDaoImpl;
+import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.User;
 
 public class LoginServiceImpl implements LoginService{
@@ -14,72 +15,24 @@ public class LoginServiceImpl implements LoginService{
 	//private final DataSource dataSource = DataSource.getInstance();
 	
 	
-	public User attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+	public User attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
 		
 		final String username = request.getParameter("username");
 		final String password = request.getParameter("password");
 		
 		System.out.println("LoginServiceImpl works for attemptAuthentication");
 		
+		int numret = UserDaoImpl.getUsDa().authenticateLogIn(username, password);
 		
-		//User us = UserDaoImpl.getUsDa().getUser(username);
-		//System.out.println("this is what is being compared password: " + password + "username: " + username);
-		
-//		if(us != null) {
-//			if(us.getPassword().contentEquals(password)) {
-//				request.getSession().setAttribute("firstname", us.getFirstname());
-//				request.getSession().setAttribute("username", us.getUsername());
-//				request.getSession().setAttribute("id", us.getId());
-//				
-//				
-//				if(us.getIsManager() == 1) {
-//					try {
-//						request.getRequestDispatcher("/ManagerHome.jsp").forward(request, response);
-//					} catch (ServletException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}else {
-//					try {
-//						request.getRequestDispatcher("/EmployeeHome.jsp").forward(request, response);
-//					} catch (ServletException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-//				
-//				return us;
-//			}else {
-//				request.getSession().setAttribute("nope", "Does not exist");
-//				try {
-//					request.getRequestDispatcher("/index.jsp").forward(request, response);
-//				} catch (ServletException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}else {
-//			request.getSession().setAttribute("nope", "Does not exist");
-//			try {
-//				request.getRequestDispatcher("/index.jsp").forward(request, response);
-//			} catch (ServletException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-		return null;
+		if(numret == 3) {
+			User next = UserDaoImpl.getUsDa().getUser(username);
+			request.getSession().setAttribute("privileges", next.getPrivileges());
+			request.getSession().setAttribute("username", next.getUsername());
+			request.getSession().setAttribute("id", next.getId());
+			return next;
+		}else {
+			return null;
+		}
 	}
+		
 }
