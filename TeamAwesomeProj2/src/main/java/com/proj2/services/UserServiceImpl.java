@@ -10,7 +10,7 @@ import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.User;
 
-public class LoginServiceImpl implements LoginService{
+public class UserServiceImpl implements UserService{
 
 	//private final DataSource dataSource = DataSource.getInstance();
 	

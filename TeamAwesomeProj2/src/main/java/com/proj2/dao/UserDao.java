@@ -25,5 +25,5 @@ public interface UserDao {
 		
 	// DELETE methods
 	public void deleteUser(String username) throws SQLException;
-	
+
 }

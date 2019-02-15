@@ -9,7 +9,7 @@ import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.User;
 
-public interface LoginService {
+public interface UserService {
 	
 	User attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws SQLException, PrivilegesNotFoundException, UserNotFoundException;
 }
