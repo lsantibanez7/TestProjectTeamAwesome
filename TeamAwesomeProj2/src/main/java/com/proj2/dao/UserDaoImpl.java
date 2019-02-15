@@ -15,30 +15,19 @@ import com.proj2.model.User;
 import com.proj2.util.JDBSCConnectionUtil;
 
 
-public class DaoImpl implements Dao {
+public class UserDaoImpl implements UserDao {
 
 	//left it as returning zero because it does not have an out parameter in the database or else it would look 
 	//like the commented out code. 
 	public int authenticateLogIn(String username, String password) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			System.out.println("Tryna authenticate..");
-			
 			String sql = "{? = call authenticate_login(?,?)}";
 			CallableStatement ps = conn.prepareCall(sql);
 			ps.setString(2, username);
 			ps.setString(3, password);
 			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
-			
-			return ps.getInt(1);
-			
-//			String sql = "EXEC authenticate_login(?,?)";
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setString(1, username);
-//			ps.setString(2, password);
-//			
-//			ps.executeUpdate();
-//			
+			return ps.getInt(1);			
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();

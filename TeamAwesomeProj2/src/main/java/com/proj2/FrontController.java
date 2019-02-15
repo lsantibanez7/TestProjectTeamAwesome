@@ -1,4 +1,4 @@
-package com.proj2.frontcontroller;
+package com.proj2;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +15,9 @@ public class FrontController extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		
 		// Not logged in - can log in; can register
+		// Logged in - can view favorites (saved by id - NUMBER);
 		
-		// Logged in - can view favorites (saved by id - NUMBER); 
+		resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.processGet(req, resp))))
 		
 	}
 	
