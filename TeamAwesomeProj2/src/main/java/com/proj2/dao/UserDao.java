@@ -16,7 +16,7 @@ public interface UserDao {
 	//public User logIn(String username, String password); 
 
 	// CREATE methods
-	public void insertUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException;
+	public void insertUser(String username, String password, String email) throws InvalidUsernameException, InvalidPasswordException;
 
 	// READ methods
 	public User getUser(String username) throws UserNotFoundException; 
