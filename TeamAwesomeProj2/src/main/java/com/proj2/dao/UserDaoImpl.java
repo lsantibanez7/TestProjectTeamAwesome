@@ -83,17 +83,14 @@ public class UserDaoImpl implements UserDao {
 
 		long tic = System.currentTimeMillis();
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			System.out.println("Time to connect: " + (System.currentTimeMillis()-tic) + "ms");
-			CallableStatement cs = conn.prepareCall("{?=call ta_insert_user(?,?,?,?)}"); 
-			System.out.println("Time to prepare call: " + (System.currentTimeMillis()-tic) + "ms");
+			String sql = "{?=call ta_insert_user(?,?,?,?)}";
+			CallableStatement cs = conn.prepareCall(sql); 
 			cs.setString(2, username);
 			cs.setString(3, password);
 			cs.setString(4, "USER");
 			cs.setString(5, email);
 			cs.registerOutParameter(1, Types.NUMERIC);
-			System.out.println("Time to set up parameters " + (System.currentTimeMillis()-tic) + "ms");
-			cs.executeUpdate();
-			System.out.println("Time to execute update: " + (System.currentTimeMillis()-tic) + "ms");
+			cs.executeUpdate(); 
 			return new User(
 					cs.getInt(1), 
 					username, 
@@ -109,12 +106,15 @@ public class UserDaoImpl implements UserDao {
 	public User getUser(String username) throws UserNotFoundException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
-			String sql = "Select * from ta_user WHERE ta_user_username = ?";
+			String sql = "SELECT * FROM ta_user WHERE ta_user_username = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, username);
 			ResultSet results = stmt.executeQuery();
 			while(results.next()) {
-				
+				System.out.println(results.getInt("TA_USER_ID"));
+				System.out.println(results.getString("TA_USER_USERNAME"));
+				System.out.println(Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")));
+				System.out.println(results.getString("TA_USER_EMAIL"));
 				return new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
@@ -126,15 +126,14 @@ public class UserDaoImpl implements UserDao {
 			e.getErrorCode();
 			e.printStackTrace(); 
 		}
-		System.out.println("returned null in getUser call");
-		return null;
+		throw new UserNotFoundException("Username not found");
 	}
 
 	public List<User> getUserAll() {
 		System.out.println("getAllUsers is called properly");
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
-			String sql = "select * from ta_user";
+			String sql = "SELECT * FROM ta_user";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			
@@ -201,12 +200,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean deleteUser(String username) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			System.out.println("Preparing to delete..");
 			String sql = "{call ta_user_delete(?)}";
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setString(1, username);
 			cs.execute();
-			System.out.println("Deleted successfully");
 			return true; 
 		} catch (SQLException e) {
 			e.getSQLState();

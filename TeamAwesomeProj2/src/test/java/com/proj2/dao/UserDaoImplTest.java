@@ -22,7 +22,7 @@ public class UserDaoImplTest {
 
 	
 	@Test
-	public void testCreateAndDeletSimpleUser() { 
+	public void testCreateAndDeleteSimpleUser() { 
 		try {
 			User u = UserDaoImpl.getInstance().insertUser("test1", "test1pass", "username@uname.edu");
 			assertEquals(u.getUsername(), "test1"); 
@@ -30,15 +30,39 @@ public class UserDaoImplTest {
 			assertEquals(u.getEmail(), "username@uname.edu"); 
 			UserDaoImpl.getInstance().deleteUser("test1"); 
 			u = UserDaoImpl.getInstance().getUser("test1"); 
-			fail("user still found after deletion"); 
+			fail("UserNotFoundException not thrown"); 
 		} catch (InvalidUsernameException e) {
-			assertTrue(true);
+			fail("Invalid Username Exception"); 
 		}
 		catch (InvalidPasswordException e) {
-			
+			fail("Invalid Password Exception");
 		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
+	
+	@Test
+	public void testAuthenticateLogin() { 
+		try {
+			UserDaoImpl.getInstance().insertUser("test1", "test1pass", "username1@uname.edu");
+			UserDaoImpl.getInstance().insertUser("test2", "test2pass", "username2@uname.edu");
+			UserDaoImpl.getInstance().insertUser("test3", "test3pass", "username3@uname.edu");
+			int auth1 = UserDaoImpl.getInstance().authenticateLogIn("test1ag;jsja;", "djagls;jeg;jsofaj"); 
+			int auth2 = UserDaoImpl.getInstance().authenticateLogIn("test2", "djagls;jeg;jsofaj"); 
+			int auth3 = UserDaoImpl.getInstance().authenticateLogIn("test3", "test3pass");
+			UserDaoImpl.getInstance().deleteUser("test1"); 
+			UserDaoImpl.getInstance().deleteUser("test2"); 
+			UserDaoImpl.getInstance().deleteUser("test3");
+			assertEquals(auth1, 1); 
+			assertEquals(auth2, 2); 
+			assertEquals(auth3, 3);  
+		} catch (InvalidUsernameException e) {
+			fail("Invalid Username Exception"); 
+		}
+		catch (InvalidPasswordException e) {
+			fail("Invalid Password Exception");
+		}
+	}
+	
+	
 }

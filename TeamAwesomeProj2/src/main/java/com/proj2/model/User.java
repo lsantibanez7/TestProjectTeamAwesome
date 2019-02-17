@@ -8,17 +8,14 @@ public class User {
 	private String email; 
 	
 	public User(int id, String username, Privileges privileges, String email) {
-		super();
 		this.id = id;  
 		this.username = username;
 		this.privileges = privileges; 
 		this.email = email;
 	}
 	
-	User user = new User(1, "test-user", Privileges.USER, "user@test.edu"); 
 	
 	public User() {
-		super(); 
 		
 	}
 
