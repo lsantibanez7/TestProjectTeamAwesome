@@ -131,10 +131,10 @@ public class UserDaoImpl implements UserDao {
 
 	public boolean deleteUser(String username) throws SQLException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "EXEC ta_user_delete(?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			
+			String sql = "{? = call ta_user_delete(?)}";
+			CallableStatement ps = conn.prepareCall(sql);
+			ps.setString(2, username);
+			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -143,13 +143,6 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();		}
 		
 		return false;
-	}
-
-	@Override
-	public boolean insertUser(String username, String password) {
-		
-		return false;
-		
 	}
 
 	@Override
