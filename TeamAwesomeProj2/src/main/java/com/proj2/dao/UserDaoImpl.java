@@ -9,25 +9,35 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.InvalidEmailException;
+import com.proj2.exception.InvalidPasswordException;
+import com.proj2.exception.InvalidUsernameException;
 import com.proj2.exception.UserNotFoundException;
+import com.proj2.model.Privileges;
 import com.proj2.model.User;
 import com.proj2.util.JDBSCConnectionUtil;
 
 
 public class UserDaoImpl implements UserDao {
 	
-	private static UserDaoImpl usDa;
+	private static UserDaoImpl mInstance;
 	
-	public static UserDaoImpl getUsDa() {
-		if(usDa == null) {
-			usDa = new UserDaoImpl();
+	private UserDaoImpl() {
+		super(); 
+	}
+	
+	public static UserDaoImpl getInstance() {
+		if(mInstance == null) {
+			mInstance = new UserDaoImpl();
 		}
 		
-		return usDa;
+		return mInstance;
 	}
 
+	
+	// ACCESS METHODS
 	public int authenticateLogIn(String username, String password) {
+		// Returns 3 for successful login; 2 for password missing, 1 for user not found, 0 for error
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "{? = call authenticate_login(?,?)}";
 			CallableStatement ps = conn.prepareCall(sql);
@@ -45,34 +55,58 @@ public class UserDaoImpl implements UserDao {
 		}
 		return 0;
 	}
-
-
-	public void logOut(String username) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	//changed to String instead of User object.
-	public void insertUser(String usr, String password, String privaleges) throws SQLException {
+	
+	// CREATE METHODS 
+	@Override
+	public boolean insertUserB(String username, String password, String email)
+			throws InvalidUsernameException, InvalidPasswordException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "{? = call ta_insert_user(?,?,?)}";
-			CallableStatement cs = conn.prepareCall(sql);
-			cs.setString(2, usr);
+			
+			CallableStatement cs = conn.prepareCall("{?=call ta_insert_user(?,?,?,?)"); 
+			cs.setString(2, username);
 			cs.setString(3, password);
-			cs.setString(4, privaleges);
-			
+			cs.setString(4, Privileges.USER.name());
+			cs.setString(5, email);
 			cs.registerOutParameter(1, Types.NUMERIC);
-			
 			cs.executeUpdate();
+			return true;
 			
 		} catch (SQLException e) {
-			e.getSQLState();
-			e.getErrorCode();
-			e.printStackTrace();		}
+			e.printStackTrace();
+			return false; 
+		}
+	}
+
+	@Override
+	public User insertUser(String username, String password, String email)
+			throws InvalidUsernameException, InvalidPasswordException {
+
+		long tic = System.currentTimeMillis();
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			System.out.println("Time to connect: " + (System.currentTimeMillis()-tic) + "ms");
+			CallableStatement cs = conn.prepareCall("{?=call ta_insert_user(?,?,?,?)}"); 
+			System.out.println("Time to prepare call: " + (System.currentTimeMillis()-tic) + "ms");
+			cs.setString(2, username);
+			cs.setString(3, password);
+			cs.setString(4, "USER");
+			cs.setString(5, email);
+			cs.registerOutParameter(1, Types.NUMERIC);
+			System.out.println("Time to set up parameters " + (System.currentTimeMillis()-tic) + "ms");
+			cs.executeUpdate();
+			System.out.println("Time to execute update: " + (System.currentTimeMillis()-tic) + "ms");
+			return new User(
+					cs.getInt(1), 
+					username, 
+					Privileges.USER, 
+					email 
+					);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null; 
+		}
 	}
 	
-
-	public User getUser(String username) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
+	public User getUser(String username) throws UserNotFoundException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			String sql = "Select * from ta_user WHERE ta_user_username = ?";
@@ -84,19 +118,19 @@ public class UserDaoImpl implements UserDao {
 				return new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
-						results.getString("TA_USER_PRIVILEGES"),
+						Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")),
 						results.getString("TA_USER_EMAIL"));
 			}	
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 		System.out.println("returned null in getUser call");
 		return null;
 	}
 
-	public List<User> getUserAll() throws SQLException, PrivilegesNotFoundException {
+	public List<User> getUserAll() {
 		System.out.println("getAllUsers is called properly");
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
@@ -112,7 +146,7 @@ public class UserDaoImpl implements UserDao {
 				allUsers.add(new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
-						results.getString("TA_USER_PRIVILEGES"),
+						Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")),
 						results.getString("TA_USER_EMAIL"))
 						);
 			}
@@ -126,18 +160,59 @@ public class UserDaoImpl implements UserDao {
 		return new ArrayList<>();
 	}
 
-	public void deleteUser(String username) throws SQLException {
+	@Override
+	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateUsername(String username, String newUsername)
+			throws UserNotFoundException, InvalidUsernameException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updatePassword(String username, String newPassword)
+			throws UserNotFoundException, InvalidPasswordException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(String username) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "EXEC ta_user_delete(?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			
-			ps.executeUpdate();
-			
+			System.out.println("Preparing to delete..");
+			String sql = "{call ta_user_delete(?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setString(1, username);
+			cs.execute();
+			System.out.println("Deleted successfully");
+			return true; 
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();		}
+			e.printStackTrace();		
+			}
+		return false;
 	}
-
 }

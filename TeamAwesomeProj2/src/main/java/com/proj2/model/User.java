@@ -3,12 +3,11 @@ package com.proj2.model;
 public class User {
 	
 	private int id; 
-	private String username;
-	//private Privileges privileges; 
-	private String privileges;
+	private String username; 
+	private Privileges privileges;
 	private String email; 
 	
-	public User(int id, String username, String privileges, String email) {
+	public User(int id, String username, Privileges privileges, String email) {
 		super();
 		this.id = id;  
 		this.username = username;
@@ -16,8 +15,11 @@ public class User {
 		this.email = email;
 	}
 	
+	User user = new User(1, "test-user", Privileges.USER, "user@test.edu"); 
+	
 	public User() {
 		super(); 
+		
 	}
 
 	public int getId() {
@@ -44,11 +46,11 @@ public class User {
 //		this.privileges = privileges; 
 //	}
 	
-	public String getPrivileges() {
+	public Privileges getPrivileges() {
 		return privileges; 
 	}
 	
-	public void setPrivileges(String privileges) {
+	public void setPrivileges(Privileges privileges) {
 		this.privileges = privileges; 
 	}
 
@@ -62,7 +64,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", privileges=" + privileges + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", privileges=" + privileges.toString() + ", email=" + email + "]";
 	}
 	
 //	public String toStringF() {
@@ -70,7 +72,7 @@ public class User {
 //	}
 	
 	public String toStringF() {
-		return (wordFit((id+""), 5) + wordFit(username, 9) + " " + wordFit(privileges, 10) + " " + wordFit(email, 50));  
+		return (wordFit((id+""), 5) + wordFit(username, 9) + " " + wordFit(privileges.name(), 10) + " " + wordFit(email, 50));  
 	}
 	
 	private String wordFit(String word, int len) {

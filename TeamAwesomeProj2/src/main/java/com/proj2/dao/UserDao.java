@@ -3,7 +3,9 @@ package com.proj2.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.InvalidEmailException;
+import com.proj2.exception.InvalidPasswordException;
+import com.proj2.exception.InvalidUsernameException;
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.User;
 
@@ -12,25 +14,26 @@ import com.proj2.model.User;
 public interface UserDao {
 	
 	// ACCESS methods
-	public int authenticateLogIn(String username, String password) throws UserNotFoundException;
-	//public User logIn(String username, String password); 
+	public int authenticateLogIn(String username, String password) throws UserNotFoundException; // 100%; untested
+	//public User logIn(String username, String password); // 0%
 
 	// CREATE methods
-	public void insertUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException;
-
+	public boolean insertUserB(String username, String password, String email) throws InvalidUsernameException, InvalidPasswordException; // 100%; untested 
+	public User insertUser(String username, String password, String email) throws InvalidUsernameException, InvalidPasswordException; // 100%; untested
+	
 	// READ methods
-	public User getUser(String username) throws UserNotFoundException; 
-	public List<User> getUserAll();	
+	public User getUser(String username) throws UserNotFoundException; // 100%, untested
+	public List<User> getUserAll();	// 100%, untested
 
 	// UPDATE methods
-	public void updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; 
-	public void updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException; 
-	public void updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException;  
-	public void updatePrivilegesToUser(String username) throws UserNotFoundException;
-	public void updatePrivilegesToAdmin(String username) throws UserNotFoundException; 
-	public void updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException; 
+	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; // 0% 
+	public boolean updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException; // 0% 
+	public boolean updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException; // 0%
+	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException; // 0%
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException; // 0%
+	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException; //0% 
 
 	// DELETE methods
-	public void deleteUser(String username) throws SQLException;
+	public boolean deleteUser(String username); // 0%
 
 }

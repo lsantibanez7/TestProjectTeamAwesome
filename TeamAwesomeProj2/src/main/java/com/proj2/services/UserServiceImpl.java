@@ -22,10 +22,10 @@ public class UserServiceImpl implements UserService{
 		
 		System.out.println("LoginServiceImpl works for attemptAuthentication");
 		
-		int numret = UserDaoImpl.getUsDa().authenticateLogIn(username, password);
+		int numret = UserDaoImpl.getInstance().authenticateLogIn(username, password);
 		
 		if(numret == 3) {
-			User next = UserDaoImpl.getUsDa().getUser(username);
+			User next = UserDaoImpl.getInstance().getUser(username);
 			request.getSession().setAttribute("privileges", next.getPrivileges());
 			request.getSession().setAttribute("username", next.getUsername());
 			request.getSession().setAttribute("id", next.getId());
