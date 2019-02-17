@@ -26,6 +26,24 @@ private MasterDispatcher() {}
 		
 		if(request.getRequestURI().contains("Authorize")) {
 			return userservice.attemptAuthentication(request, response);
+		}else if(request.getRequestURI().contains("Register")) {
+			return userservice.register(request, response);
+		}else if(request.getRequestURI().contains("ViewSavedWork")) {
+			return userservice.viewSavedWork(request, response);
+		}else if(request.getRequestURI().contains("SaveArtwork")) {
+			return userservice.saveArtwork(request, response);
+		}else if(request.getRequestURI().contains("UpdateEmail")) {
+			return userservice.updateEmail(request, response);
+		}else if(request.getRequestURI().contains("UpdateUsername")) {
+			return userservice.updateUsername(request, response);
+		}else if(request.getRequestURI().contains("UpdatePassword")) {
+			return userservice.updatePassword(request, response);
+		}else if(request.getRequestURI().contains("UpdatePrivilegesToUser")) {
+			return userservice.updatePrivilegesToUser(request, response);
+		}else if(request.getRequestURI().contains("UpdatePrivilegesToAdmin")) {
+			return userservice.updatePrivilegesToAdmin(request, response);
+		}else if(request.getRequestURI().contains("DeleteUser")) {
+			return userservice.deleteUser(request, response);
 		}
 		else {
 			return "Not yet Implented";

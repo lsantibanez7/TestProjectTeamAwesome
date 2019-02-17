@@ -15,9 +15,9 @@ public class WorksDaoImpl implements WorksDao{
 	}
 	
 	@Override
-	public void saveWorks(String username, int api_id, String comment) {
+	public boolean saveWorks(String username, int api_id, String comment) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -27,15 +27,15 @@ public class WorksDaoImpl implements WorksDao{
 	}
 
 	@Override
-	public void updateComment(String comment) {
+	public boolean updateComment(String comment) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	public void deleteWorks(int id) {
+	public boolean deleteWorks(int id) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

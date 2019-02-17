@@ -5,14 +5,14 @@ import com.proj2.model.Works;
 public interface WorksDao {
 
 	// CREATE methods
-	public void saveWorks(String username, int api_id, String comment); 
+	public boolean saveWorks(String username, int api_id, String comment); 
 	
 	// READ methods
 	public Works getWorks(int id);
 	
 	// UPDATE methods
-	public void updateComment(String comment); 
+	public boolean updateComment(String comment); 
 	
 	// DELETE methods
-	public void deleteWorks(int id); 
+	public boolean deleteWorks(int id); 
 }

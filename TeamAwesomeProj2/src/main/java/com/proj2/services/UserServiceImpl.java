@@ -42,17 +42,33 @@ public class UserServiceImpl implements UserService{
 		final String password = request.getParameter("password");
 		final String email = request.getParameter("email");
 		
-		UserDaoImpl.getUsDa().insertUser(username, password, email);
+		request.getSession().setAttribute("username", username);
 		
-		return null;
+		boolean outcome = UserDaoImpl.getUsDa().insertUser(username, password, email);
+		
+		if(outcome == true) {
+			User setUser;
+			try {
+				
+				setUser = UserDaoImpl.getUsDa().getUser(username);
+				request.getSession().setAttribute("id", setUser.getId());
+				return true;
+			} catch (UserNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		return false;
 	}
 
 	@Override
 	public Object viewSavedWork(HttpServletRequest request, HttpServletResponse response) {
-		final String username = request.getParameter("username");
+		String obj = (String)request.getSession().getAttribute("username");
 		
 		try {
-			User view = UserDaoImpl.getUsDa().getUser(username);
+			User view = UserDaoImpl.getUsDa().getUser(obj);
 			return WorksDaoImpl.getWoDa().getWorks(view.getId());
 		} catch (UserNotFoundException e) {
 
@@ -65,16 +81,76 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
-		final String username = request.getParameter("username");
+		String obj = (String)request.getSession().getAttribute("username");
 		final int api_id = Integer.parseInt(request.getParameter("api_id"));
 		final String comment = request.getParameter("comment");
 		
-		WorksDaoImpl.getWoDa().saveWorks(username, api_id, comment);
+		
+		return WorksDaoImpl.getWoDa().saveWorks(obj, api_id, comment);
+	}
+
+	@Override
+	public Object updateEmail(HttpServletRequest request, HttpServletResponse response) {
+		String obj = (String)request.getSession().getAttribute("username");
+		final String newEmail = request.getParameter("email");
+		
+		return UserDaoImpl.getUsDa().updateEmail(obj, newEmail);
+	}
+
+	@Override
+	public Object updateUsername(HttpServletRequest request, HttpServletResponse response) {
+		String obj = (String)request.getSession().getAttribute("username");
+		final String newUsername = request.getParameter("newUsername");
+		
+		return UserDaoImpl.getUsDa().updateUsername(obj, newUsername);
+	}
+
+	@Override
+	public Object updatePassword(HttpServletRequest request, HttpServletResponse response) {
+		String obj = (String)request.getSession().getAttribute("username");		
+		final String newPassword = request.getParameter("newPassword");
+		
+		return UserDaoImpl.getUsDa().updatePassword(obj, newPassword);
+
+	}
+
+	@Override
+	public Object updatePrivilegesToAdmin(HttpServletRequest request, HttpServletResponse response) {
+		String obj = request.getParameter("username");
+		try {
+		
+			return UserDaoImpl.getUsDa().updatePrivilegesToAdmin(obj);
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Object deleteUser(HttpServletRequest request, HttpServletResponse response) {
+		String obj = request.getParameter("username");
+		
+		try {
+			return UserDaoImpl.getUsDa().deleteUser(obj);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		
+		return false;
+	}
+
+	@Override
+	public Object updatePrivilegesToUser(HttpServletRequest request, HttpServletResponse response) {
+		String obj = request.getParameter("username");
+		
+		try {
+			return UserDaoImpl.getUsDa().updatePrivilegesToUser(obj);
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
-	
 
 		
 }

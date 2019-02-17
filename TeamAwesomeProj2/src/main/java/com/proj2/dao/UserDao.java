@@ -16,21 +16,21 @@ public interface UserDao {
 	//public User logIn(String username, String password); 
 
 	// CREATE methods
-	public void insertUser(String username, String password, String email) throws InvalidUsernameException, InvalidPasswordException;
+	public boolean insertUser(String username, String password, String email) throws InvalidUsernameException, InvalidPasswordException;
 
 	// READ methods
 	public User getUser(String username) throws UserNotFoundException; 
 	public List<User> getUserAll();	
 
 	// UPDATE methods
-	public void updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; 
-	public void updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException; 
-	public void updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException;  
-	public void updatePrivilegesToUser(String username) throws UserNotFoundException;
-	public void updatePrivilegesToAdmin(String username) throws UserNotFoundException; 
-	public void updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException; 
+	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; 
+	public boolean updateUsername(String username, String newUsername); 
+	public boolean updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException;  
+	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException;
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException; 
+	public boolean updateEmail(String username, String email); 
 
 	// DELETE methods
-	public void deleteUser(String username) throws SQLException;
+	public boolean deleteUser(String username) throws SQLException;
 
 }

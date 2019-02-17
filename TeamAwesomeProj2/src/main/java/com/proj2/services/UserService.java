@@ -7,15 +7,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
-import com.proj2.model.User;
-import com.proj2.model.Works;
 
 public interface UserService {
 	
+	//Authentification and creating a new user
 	Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws SQLException, PrivilegesNotFoundException, UserNotFoundException;
 	Object register(HttpServletRequest request, HttpServletResponse response);
+	
+	//Artwork saving and viewing
 	Object viewSavedWork(HttpServletRequest request, HttpServletResponse response);
 	Object saveArtwork(HttpServletRequest request, HttpServletResponse response);
 	
-
+	//Updating/deleting users
+	Object updateEmail(HttpServletRequest request, HttpServletResponse response);
+	Object updateUsername(HttpServletRequest request, HttpServletResponse response);
+	Object updatePassword(HttpServletRequest request, HttpServletResponse response);
+	Object updatePrivilegesToUser(HttpServletRequest request, HttpServletResponse response);
+	Object updatePrivilegesToAdmin(HttpServletRequest request, HttpServletResponse response);
+	Object deleteUser(HttpServletRequest request, HttpServletResponse response);
 }

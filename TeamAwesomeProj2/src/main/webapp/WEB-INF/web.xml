@@ -10,6 +10,17 @@
   	<param-value>myValue</param-value>
   </context-param>
   
+  <filter>
+  	<filter-name>CorsFilter</filter-name>
+  	<display-name>CorsFilter</display-name>
+  	<description></description>
+  	<filter-class>com.proj2.corsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CorsFilter</filter-name>
+  	<url-pattern>/proj2/*</url-pattern>
+  </filter-mapping>
+  
   <servlet>
   	<servlet-name>frontController</servlet-name>
   	<servlet-class>MasterServlet</servlet-class>

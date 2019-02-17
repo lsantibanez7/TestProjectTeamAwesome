@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	//changed to String instead of User object.
-	public void insertUser(String usr, String password, String email) {
+	public boolean insertUser(String usr, String password, String email) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "{? = call ta_insert_user(?,?,?)}";
 			CallableStatement cs = conn.prepareCall(sql);
@@ -64,11 +64,14 @@ public class UserDaoImpl implements UserDao {
 			cs.registerOutParameter(1, Types.NUMERIC);
 			
 			cs.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();		}
+			e.printStackTrace();	
+			}
+		
+		return false;
 	}
 	
 
@@ -126,61 +129,68 @@ public class UserDaoImpl implements UserDao {
 		return new ArrayList<>();
 	}
 
-	public void deleteUser(String username) throws SQLException {
+	public boolean deleteUser(String username) throws SQLException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "EXEC ta_user_delete(?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			
 			ps.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
 			e.printStackTrace();		}
+		
+		return false;
 	}
 
 	@Override
-	public void insertUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
-		// TODO Auto-generated method stub
+	public boolean insertUser(String username, String password) {
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
-		// TODO Auto-generated method stub
+	public boolean updateUser(String username, User user) {
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updateUsername(String username, String newUsername)
-			throws UserNotFoundException, InvalidUsernameException {
-		// TODO Auto-generated method stub
+	public boolean updateUsername(String username, String newUsername) {
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updatePassword(String username, String newPassword)
-			throws UserNotFoundException, InvalidPasswordException {
-		// TODO Auto-generated method stub
+	public boolean updatePassword(String username, String newPassword){
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updatePrivilegesToUser(String username) throws UserNotFoundException {
-		// TODO Auto-generated method stub
+	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException {
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updatePrivilegesToAdmin(String username) throws UserNotFoundException {
-		// TODO Auto-generated method stub
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException {
+		
+		return false;
 		
 	}
 
 	@Override
-	public void updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException {
-		// TODO Auto-generated method stub
+	public boolean updateEmail(String username, String email) {
+		
+		return false;
 		
 	}
 
