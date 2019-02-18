@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.proj2.exception.IncorrectPasswordException;
 import com.proj2.exception.InvalidEmailException;
 import com.proj2.exception.InvalidPasswordException;
 import com.proj2.exception.InvalidUsernameException;
@@ -111,10 +112,6 @@ public class UserDaoImpl implements UserDao {
 			stmt.setString(1, username);
 			ResultSet results = stmt.executeQuery();
 			while(results.next()) {
-				System.out.println(results.getInt("TA_USER_ID"));
-				System.out.println(results.getString("TA_USER_USERNAME"));
-				System.out.println(Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")));
-				System.out.println(results.getString("TA_USER_EMAIL"));
 				return new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
@@ -159,6 +156,8 @@ public class UserDaoImpl implements UserDao {
 		return new ArrayList<>();
 	}
 
+	//////////////////////////// UPDATE METHODS ////////////////////////////////
+	
 	@Override
 	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
 		// TODO Auto-generated method stub
@@ -175,8 +174,36 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean updatePassword(String username, String newPassword)
 			throws UserNotFoundException, InvalidPasswordException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_password(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, newPassword);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
+	public boolean updateVerifyPassword(String username, String oldPassword, String newPassword)
+			throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException{
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "{?=call ta_user_verify_update_password(?,?,?)}"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(2,  username);
+			cs.setString(3, oldPassword);
+			cs.setString(4, newPassword);
+			cs.registerOutParameter(1,  Types.NUMERIC);
+			cs.execute();  
+			if(cs.getInt(1) == 0) {
+				throw new IncorrectPasswordException("Password Not Found"); 
+			}
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
