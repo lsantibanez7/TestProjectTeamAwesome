@@ -39,21 +39,33 @@ private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("doPost works");
 		resp.setContentType("application/json");
-		resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.dopost(req, resp)));
+		try {
+			resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.dopost(req, resp)));
+		} catch (SQLException | UserNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("doPut works");
 		resp.setContentType("application/json");
-		resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.doput(req, resp)));
+		try {
+			resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.doput(req, resp)));
+		} catch (SQLException | UserNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("doDelete works.");
 		resp.setContentType("application/json");
-		resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.dodelete(req, resp)));
+		try {
+			resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.dodelete(req, resp)));
+		} catch (SQLException | UserNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
