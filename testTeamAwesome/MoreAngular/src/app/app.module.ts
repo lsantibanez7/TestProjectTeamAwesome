@@ -4,7 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PropertyBindingComponent } from './components/property-binding/property-binding.component';
+import { PropertyBindingComponent } from './component/property-binding/property-binding.component';
+import { FormsModule } from '@angular/forms';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { PropertyBindingComponent } from './components/property-binding/property
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    Ng2CarouselamosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

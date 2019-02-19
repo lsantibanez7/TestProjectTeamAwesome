@@ -10,7 +10,24 @@ import { Observable } from 'rxjs';
 })
 export class PropertyBindingComponent implements OnInit {
 
+  selectedArtist: string = "";
+
+  selectedPlace: string = "";
+
+  selectChangeHandler (event: any) {
+    this.selectedArtist = event.target.value;
+  }
+
+  selectChangeHandler2(event: any){
+    this.selectedPlace = event.target.value;
+  }
+
   private isHidden: boolean;
+
+  //museum = ['Musée du Louvre', 'Paris, musée du quai Branly - Jacques Chirac', 'musée d\'Orsay','Versailles, châteaux de Versailles et de Trianon'];
+
+  public person: string;
+  public place: string;
 
   public zeroImage: any;
   public zeroTitle: String;
@@ -60,13 +77,80 @@ export class PropertyBindingComponent implements OnInit {
     //This is the call to the API, bringing back
     this.Photos = this.configService.getConfig();
 
-    //might have to change location of this to get the next page of photos. 
-    //unsure, depends on how changing the data.
-    //possibly a new method that will do this that I call from 
-    //the toggle() method??
+    this.loadInfo();
+  }
+
+  toggle(): void {
+    this.isHidden = !this.isHidden;
+  }
+
+  nextPage(): any {
+    //This is the call to the API, bringing back
+    this.Photos = this.configService.upPage(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+
+  }
+
+  prevPage() : any {
+
+    this.Photos = this.configService.downPage(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
+  searchItems(): any {
+    if(this.selectedArtist == "Any" && this.selectedPlace == "Any"){
+      this.Photos = this.configService.getConfig();
+      this.loadInfo();
+    }
+    else if(this.selectedArtist != "Any" && this.selectedPlace == "Any"){
+      this.Photos = this.configService.getArtist(this.selectedArtist);
+      this.loadInfo();
+    }
+    else if(this.selectedArtist == "Any" && this.selectedPlace != "Any"){
+      this.Photos = this.configService.getPlace(this.selectedPlace);
+      this.loadInfo();
+    }
+    else if(this.selectedArtist != "Any" && this.selectedPlace != "Any"){
+      this.Photos = this.configService.getItems(this.selectedPlace, this.selectedArtist);
+      this.loadInfo();
+    }
+  }
+
+  // //not used
+  // searchPlace(): any {
+  //   if(this.selectedPlace == "Any"){
+  //     this.Photos = this.configService.getConfig();
+  //     this.loadInfo();
+  //   }
+  //   else if(this.selectedPlace != "Any"){
+  //     console.log("Checking place");
+  //  //   this.Photos = this.configService.getPlace(this.selectedPlace);
+  //     this.loadInfo();
+  //   }
+  // }
+
+  // //not used
+  // searchPeople(): any {
+    
+  //   if(this.selectedArtist == "Any"){
+  //     this.Photos = this.configService.getConfig();
+  //     this.loadInfo();
+  //   }
+  //   else if (this.selectedArtist != "Any"){
+  //     console.log("Checking info");
+  //  //   this.Photos = this.configService.getArtist(this.selectedArtist);
+  //     this.loadInfo();
+  //   }
+  // }
+
+  loadInfo(): any {
+
     this.Photos.subscribe((data) => {
 
       //Location area in the data will locate the city/possible museum
+      //don't show images with ID 359813 and 257628
       console.log(data);
       if (data != null) {
         this.zeroImage = data.hits.hits[0]._source.images[0].urls.original;
@@ -87,6 +171,13 @@ export class PropertyBindingComponent implements OnInit {
         else {
           this.zeroCreator = data.hits.hits[0]._source.authors[0].name.en;
         }
+        //This will hide the info for the first logo photo
+        //however, the html card div will still display
+        // if(data.hits.hits[0]._id == 359813){
+        //   this.zeroImage = "";
+        //   this.zeroCreator = "";
+        //   this.zeroTitle = "";
+        // }
 
         this.firstImage = data.hits.hits[1]._source.images[0].urls.original;
         this.firstTitle = data.hits.hits[1]._source.title;
@@ -260,10 +351,5 @@ export class PropertyBindingComponent implements OnInit {
         }
       }
     });
-  }
-
-
-  toggle(): void {
-    this.isHidden = !this.isHidden;
   }
 }
