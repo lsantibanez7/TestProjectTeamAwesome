@@ -1,6 +1,5 @@
 package com.proj2.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.proj2.exception.IncorrectPasswordException;

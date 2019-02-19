@@ -13,9 +13,10 @@ public interface UserService {
 	Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws SQLException, UserNotFoundException;
 	Object register(HttpServletRequest request, HttpServletResponse response);
 	
-	//Artwork saving and viewing
+	//Artwork saving, viewing, deleting and updating comments
 	Object viewSavedWork(HttpServletRequest request, HttpServletResponse response);
 	Object saveArtwork(HttpServletRequest request, HttpServletResponse response);
+	
 	
 	//Updating/deleting users
 	Object updateEmail(HttpServletRequest request, HttpServletResponse response);
