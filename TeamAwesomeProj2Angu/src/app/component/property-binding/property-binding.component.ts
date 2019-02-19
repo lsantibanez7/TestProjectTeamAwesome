@@ -22,7 +22,7 @@ export class PropertyBindingComponent implements OnInit {
     this.selectedPlace = event.target.value;
   }
 
-  private isHidden: boolean;
+  public isHidden: boolean;
 
   //museum = ['Musée du Louvre', 'Paris, musée du quai Branly - Jacques Chirac', 'musée d\'Orsay','Versailles, châteaux de Versailles et de Trianon'];
 

@@ -1,9 +1,19 @@
-* {
-    box-sizing: border-box;
+.c {
+    padding: 15px;
+    margin-top: 30px;
+    box-shadow: 00 16px 1px rgba(0,0,0,0.1);
+    background-color: rgb(226, 226, 226);
 }
-img {
-    max-width: 100%;
-    max-height: 75%;
+.c img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.3);
+}
+
+.c .card-img-top {
+    margin-top: -30px;
+    margin-bottom: 15px;
 }
 
 #artButton {
@@ -15,20 +25,7 @@ img {
     padding: 5px;
 } 
 
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-.card-img-top{
-    width: 100%;
-    height: auto;
-}
 .buttonDiv {
     justify-content: center;
     
-}
-
-.card {
-    background-color: rgb(226, 226, 226);
 }
