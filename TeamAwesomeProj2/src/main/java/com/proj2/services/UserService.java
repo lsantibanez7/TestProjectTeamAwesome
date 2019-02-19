@@ -5,13 +5,12 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
 
 public interface UserService {
 	
 	//Authentification and creating a new user
-	Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws SQLException, PrivilegesNotFoundException, UserNotFoundException;
+	Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws SQLException, UserNotFoundException;
 	Object register(HttpServletRequest request, HttpServletResponse response);
 	
 	//Artwork saving and viewing

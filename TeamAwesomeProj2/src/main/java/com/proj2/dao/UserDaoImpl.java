@@ -9,25 +9,36 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.IncorrectPasswordException;
+import com.proj2.exception.InvalidEmailException;
+import com.proj2.exception.InvalidPasswordException;
+import com.proj2.exception.InvalidUsernameException;
 import com.proj2.exception.UserNotFoundException;
+import com.proj2.model.Privileges;
 import com.proj2.model.User;
 import com.proj2.util.JDBSCConnectionUtil;
 
 
 public class UserDaoImpl implements UserDao {
 	
-	private static UserDaoImpl usDa;
+	private static UserDaoImpl mInstance;
 	
-	public static UserDaoImpl getUsDa() {
-		if(usDa == null) {
-			usDa = new UserDaoImpl();
+	private UserDaoImpl() {
+		super(); 
+	}
+	
+	public static UserDaoImpl getInstance() {
+		if(mInstance == null) {
+			mInstance = new UserDaoImpl();
 		}
 		
-		return usDa;
+		return mInstance;
 	}
 
+	
+	// ACCESS METHODS
 	public int authenticateLogIn(String username, String password) {
+		// Returns 3 for successful login; 2 for password missing, 1 for user not found, 0 for error
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "{? = call authenticate_login(?,?)}";
 			CallableStatement ps = conn.prepareCall(sql);
@@ -45,65 +56,81 @@ public class UserDaoImpl implements UserDao {
 		}
 		return 0;
 	}
-
-
-	public void logOut(String username) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	//changed to String instead of User object.
-	public boolean insertUser(String usr, String password, String email) {
+	
+	// CREATE METHODS 
+	@Override
+	public boolean insertUserB(String username, String password, String email)
+			throws InvalidUsernameException, InvalidPasswordException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "{? = call ta_insert_user(?,?,?)}";
-			CallableStatement cs = conn.prepareCall(sql);
-			cs.setString(2, usr);
+			
+			CallableStatement cs = conn.prepareCall("{?=call ta_insert_user(?,?,?,?)"); 
+			cs.setString(2, username);
 			cs.setString(3, password);
-			cs.setString(4, email);
-			
+			cs.setString(4, Privileges.USER.name());
+			cs.setString(5, email);
 			cs.registerOutParameter(1, Types.NUMERIC);
-			
 			cs.executeUpdate();
 			return true;
+			
 		} catch (SQLException e) {
-			e.getSQLState();
-			e.getErrorCode();
-			e.printStackTrace();	
-			}
-		
-		return false;
+			e.printStackTrace();
+			return false; 
+		}
+	}
+
+	@Override
+	public User insertUser(String username, String password, String email)
+			throws InvalidUsernameException, InvalidPasswordException {
+
+		long tic = System.currentTimeMillis();
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "{?=call ta_insert_user(?,?,?,?)}";
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(2, username);
+			cs.setString(3, password);
+			cs.setString(4, "USER");
+			cs.setString(5, email);
+			cs.registerOutParameter(1, Types.NUMERIC);
+			cs.executeUpdate(); 
+			return new User(
+					cs.getInt(1), 
+					username, 
+					Privileges.USER, 
+					email 
+					);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null; 
+		}
 	}
 	
-
 	public User getUser(String username) throws UserNotFoundException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
-			String sql = "Select * from ta_user WHERE ta_user_username = ?";
+			String sql = "SELECT * FROM ta_user WHERE ta_user_username = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, username);
 			ResultSet results = stmt.executeQuery();
 			while(results.next()) {
-				
 				return new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
-						results.getString("TA_USER_PRIVILEGES"),
+						Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")),
 						results.getString("TA_USER_EMAIL"));
 			}	
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
-		System.out.println("returned null in getUser call");
-		return null;
+		throw new UserNotFoundException("Username not found");
 	}
 
 	public List<User> getUserAll() {
 		System.out.println("getAllUsers is called properly");
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
-			String sql = "select * from ta_user";
+			String sql = "SELECT * FROM ta_user";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			
@@ -115,7 +142,7 @@ public class UserDaoImpl implements UserDao {
 				allUsers.add(new User(
 						results.getInt("TA_USER_ID"),
 						results.getString("TA_USER_USERNAME"),
-						results.getString("TA_USER_PRIVILEGES"),
+						Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")),
 						results.getString("TA_USER_EMAIL"))
 						);
 			}
@@ -129,62 +156,87 @@ public class UserDaoImpl implements UserDao {
 		return new ArrayList<>();
 	}
 
-	public boolean deleteUser(String username) throws SQLException {
-		try(Connection conn = JDBSCConnectionUtil.getConnection()){
-			String sql = "{? = call ta_user_delete(?)}";
-			CallableStatement ps = conn.prepareCall(sql);
-			ps.setString(2, username);
-			ps.registerOutParameter(1, Types.NUMERIC);
-			ps.executeUpdate();
-			return true;
+	//////////////////////////// UPDATE METHODS ////////////////////////////////
+	
+	@Override
+	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateUsername(String username, String newUsername)
+			throws UserNotFoundException, InvalidUsernameException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updatePassword(String username, String newPassword)
+			throws UserNotFoundException, InvalidPasswordException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_password(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, newPassword);
+			cs.execute();  
+			return true; 
 		} catch (SQLException e) {
-			e.getSQLState();
-			e.getErrorCode();
-			e.printStackTrace();		}
-		
-		return false;
+			return false; 
+		}
 	}
-
+	
 	@Override
-	public boolean updateUser(String username, User user) {
-		
-		return false;
-		
-	}
-
-	@Override
-	public boolean updateUsername(String username, String newUsername) {
-		
-		return false;
-		
-	}
-
-	@Override
-	public boolean updatePassword(String username, String newPassword){
-		
-		return false;
-		
+	public boolean updateVerifyPassword(String username, String oldPassword, String newPassword)
+			throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException{
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "{?=call ta_user_verify_update_password(?,?,?)}"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(2,  username);
+			cs.setString(3, oldPassword);
+			cs.setString(4, newPassword);
+			cs.registerOutParameter(1,  Types.NUMERIC);
+			cs.execute();  
+			if(cs.getInt(1) == 0) {
+				throw new IncorrectPasswordException("Password Not Found"); 
+			}
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
 	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException {
-		
+		// TODO Auto-generated method stub
 		return false;
-		
 	}
 
 	@Override
 	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException {
-		
+		// TODO Auto-generated method stub
 		return false;
-		
 	}
 
 	@Override
-	public boolean updateEmail(String username, String email) {
-		
+	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException {
+		// TODO Auto-generated method stub
 		return false;
-		
 	}
 
+	@Override
+	public boolean deleteUser(String username) {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "{call ta_user_delete(?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setString(1, username);
+			cs.execute();
+			return true; 
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();		
+			}
+		return false;
+	}
 }

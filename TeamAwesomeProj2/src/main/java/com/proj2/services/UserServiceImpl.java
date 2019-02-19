@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.proj2.dao.UserDaoImpl;
 import com.proj2.dao.WorksDaoImpl;
-import com.proj2.exception.PrivilegesNotFoundException;
+import com.proj2.exception.InvalidEmailException;
+import com.proj2.exception.InvalidPasswordException;
+import com.proj2.exception.InvalidUsernameException;
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.User;
 
@@ -16,17 +18,17 @@ public class UserServiceImpl implements UserService{
 	//private final DataSource dataSource = DataSource.getInstance();
 	
 	
-	public Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
+	public Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {
 		
 		final String username = request.getParameter("username");
 		final String password = request.getParameter("password");
 		
 		System.out.println("LoginServiceImpl works for attemptAuthentication");
 		
-		int numret = UserDaoImpl.getUsDa().authenticateLogIn(username, password);
+		int numret = UserDaoImpl.getInstance().authenticateLogIn(username, password);
 		
 		if(numret == 3) {
-			User next = UserDaoImpl.getUsDa().getUser(username);
+			User next = UserDaoImpl.getInstance().getUser(username);
 			request.getSession().setAttribute("privileges", next.getPrivileges());
 			request.getSession().setAttribute("username", next.getUsername());
 			request.getSession().setAttribute("id", next.getId());
@@ -44,18 +46,23 @@ public class UserServiceImpl implements UserService{
 		
 		request.getSession().setAttribute("username", username);
 		
-		boolean outcome = UserDaoImpl.getUsDa().insertUser(username, password, email);
-		
-		if(outcome == true) {
-			User setUser;
-			try {
-				
-				setUser = UserDaoImpl.getUsDa().getUser(username);
-				request.getSession().setAttribute("id", setUser.getId());
-				return true;
-			} catch (UserNotFoundException e) {
-				e.printStackTrace();
+		boolean outcome;
+		try {
+			outcome = UserDaoImpl.getInstance().insertUserB(username, password, email);
+			if(outcome == true) {
+				User setUser;
+				try {
+					
+					setUser = UserDaoImpl.getInstance().getUser(username);
+					request.getSession().setAttribute("id", setUser.getId());
+					return true;
+				} catch (UserNotFoundException e) {
+					e.printStackTrace();
+				}
 			}
+		} catch (InvalidUsernameException | InvalidPasswordException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
 		
@@ -68,7 +75,7 @@ public class UserServiceImpl implements UserService{
 		String obj = (String)request.getSession().getAttribute("username");
 		
 		try {
-			User view = UserDaoImpl.getUsDa().getUser(obj);
+			User view = UserDaoImpl.getInstance().getUser(obj);
 			return WorksDaoImpl.getWoDa().getWorks(view.getId());
 		} catch (UserNotFoundException e) {
 
@@ -94,7 +101,14 @@ public class UserServiceImpl implements UserService{
 		String obj = (String)request.getSession().getAttribute("username");
 		final String newEmail = request.getParameter("email");
 		
-		return UserDaoImpl.getUsDa().updateEmail(obj, newEmail);
+		try {
+			return UserDaoImpl.getInstance().updateEmail(obj, newEmail);
+		} catch (UserNotFoundException | InvalidEmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("null was returned for update email");
+		return null;
 	}
 
 	@Override
@@ -102,7 +116,15 @@ public class UserServiceImpl implements UserService{
 		String obj = (String)request.getSession().getAttribute("username");
 		final String newUsername = request.getParameter("newUsername");
 		
-		return UserDaoImpl.getUsDa().updateUsername(obj, newUsername);
+		try {
+			return UserDaoImpl.getInstance().updateUsername(obj, newUsername);
+		} catch (UserNotFoundException | InvalidUsernameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		System.out.println("null was returned for updateusername");
+		return null;
 	}
 
 	@Override
@@ -110,7 +132,15 @@ public class UserServiceImpl implements UserService{
 		String obj = (String)request.getSession().getAttribute("username");		
 		final String newPassword = request.getParameter("newPassword");
 		
-		return UserDaoImpl.getUsDa().updatePassword(obj, newPassword);
+		try {
+			return UserDaoImpl.getInstance().updatePassword(obj, newPassword);
+		} catch (UserNotFoundException | InvalidPasswordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("returned null for updatePassword");
+		return null;
 
 	}
 
@@ -119,7 +149,7 @@ public class UserServiceImpl implements UserService{
 		String obj = request.getParameter("username");
 		try {
 		
-			return UserDaoImpl.getUsDa().updatePrivilegesToAdmin(obj);
+			return UserDaoImpl.getInstance().updatePrivilegesToAdmin(obj);
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -130,14 +160,7 @@ public class UserServiceImpl implements UserService{
 	public Object deleteUser(HttpServletRequest request, HttpServletResponse response) {
 		String obj = request.getParameter("username");
 		
-		try {
-			return UserDaoImpl.getUsDa().deleteUser(obj);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return false;
+		return UserDaoImpl.getInstance().deleteUser(obj);
 	}
 
 	@Override
@@ -145,7 +168,7 @@ public class UserServiceImpl implements UserService{
 		String obj = request.getParameter("username");
 		
 		try {
-			return UserDaoImpl.getUsDa().updatePrivilegesToUser(obj);
+			return UserDaoImpl.getInstance().updatePrivilegesToUser(obj);
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
 		}

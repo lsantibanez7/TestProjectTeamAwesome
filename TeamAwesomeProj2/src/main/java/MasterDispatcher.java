@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.services.UserService;
 import com.proj2.services.UserServiceImpl;
@@ -20,7 +19,7 @@ private MasterDispatcher() {}
 	//private static final LoginService loginService = new LoginServiceImpl();
 	private static final UserService userservice = new UserServiceImpl();
 
-	public static Object doget(HttpServletRequest request, HttpServletResponse response) throws SQLException, PrivilegesNotFoundException, UserNotFoundException {
+	public static Object doget(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {
 		
 		
 		

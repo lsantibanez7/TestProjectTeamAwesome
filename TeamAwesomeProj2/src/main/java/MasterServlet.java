@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.BasicConfigurator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proj2.exception.PrivilegesNotFoundException;
 import com.proj2.exception.UserNotFoundException;
 
 public class MasterServlet extends HttpServlet{
@@ -30,8 +29,6 @@ private static final long serialVersionUID = 1L;
 		try {
 			resp.getWriter().append(mapper.writeValueAsString(MasterDispatcher.doget(req, resp)));
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (PrivilegesNotFoundException e) {
 			e.printStackTrace();
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
