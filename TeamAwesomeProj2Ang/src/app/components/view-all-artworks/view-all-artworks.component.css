@@ -1,0 +1,36 @@
+.c {
+    padding: 15px;
+    margin-top: 30px;
+    background-color: rgb(226, 226, 226);
+}
+.c img {
+    width: 100%;
+    object-fit: cover;
+    border-style: inset;
+    border-width: 5px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+
+.c .card-img-top {
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
+#artButton {
+    text-align: center;
+}
+
+
+.column {
+    width: 20%;
+    padding: 5px;
+} 
+
+.buttonDiv {
+    justify-content: center;
+    
+}
+
+
+
+
