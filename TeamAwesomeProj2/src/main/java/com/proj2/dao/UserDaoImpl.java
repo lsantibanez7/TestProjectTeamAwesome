@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
 	
 	// CREATE METHODS 
 	@Override
-	public boolean insertUserB(String username, String password, String email)
+	public boolean insertUserReturnsBoolean(String username, String password, String email)
 			throws InvalidUsernameException, InvalidPasswordException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
@@ -104,12 +104,40 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 	
-	public User getUser(String username) throws UserNotFoundException {
+	public User getUser(String username) throws UserNotFoundException { 
+		return getUserByUsername(username); 
+	}
+	
+	@Override
+	public User getUserByUsername(String username) throws UserNotFoundException{
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			String sql = "SELECT * FROM ta_user WHERE ta_user_username = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, username);
+			ResultSet results = stmt.executeQuery();
+			while(results.next()) {
+				return new User(
+						results.getInt("TA_USER_ID"),
+						results.getString("TA_USER_USERNAME"),
+						Privileges.valueOf(results.getString("TA_USER_PRIVILEGES")),
+						results.getString("TA_USER_EMAIL"));
+			}	
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace(); 
+		}
+		throw new UserNotFoundException("Username not found");
+	}
+
+	@Override
+	public User getUserById(int id) throws UserNotFoundException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			String sql = "SELECT * FROM ta_user WHERE ta_user_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
 			ResultSet results = stmt.executeQuery();
 			while(results.next()) {
 				return new User(
@@ -159,6 +187,12 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
+		System.out.println("This method will be deprecated; Please use updateUserById (or updateUserByUsername if necessary)");
+		return updateUserByUsername(username, user);
+	}
+
+	@Override
+	public boolean updateUserByUsername(String username, User user) throws UserNotFoundException, InvalidUsernameException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update(?,?,?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -172,14 +206,34 @@ public class UserDaoImpl implements UserDao {
 			return false; 
 		}
 	}
+	
+	@Override
+	public boolean updateUserById(int id, User user) throws UserNotFoundException, InvalidUsernameException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_by_id(?,?,?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1, id);
+			cs.setString(2, user.getUsername());
+			cs.setString(3, user.getPrivileges().name());
+			cs.setString(4, user.getEmail());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
+	public boolean updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException {
+		return updateUsernameByUsername(username, newUsername); 
+	}
 
 	@Override
-	public boolean updateUsername(String username, String newUsername)
-			throws UserNotFoundException, InvalidUsernameException {
+	public boolean updateUsernameByUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update_username(?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
-			cs.setString(1,  username);
+			cs.setString(1, username);
 			cs.setString(2, newUsername);
 			cs.execute();  
 			return true; 
@@ -187,10 +241,28 @@ public class UserDaoImpl implements UserDao {
 			return false; 
 		}
 	}
-
+	
 	@Override
-	public boolean updatePassword(String username, String newPassword)
-			throws UserNotFoundException, InvalidPasswordException {
+	public boolean updateUsernameById(int id, String newUsername) throws UserNotFoundException, InvalidUsernameException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_username_by_id(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1, id);
+			cs.setString(2, newUsername);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
+	public boolean updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException {
+		return updatePasswordByUsername(username, newPassword);
+	}
+	
+	@Override
+	public boolean updatePasswordByUsername(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update_password(?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -202,10 +274,30 @@ public class UserDaoImpl implements UserDao {
 			return false; 
 		}
 	}
-	
+
+	@Override
+	public boolean updatePasswordById(int id, String newPassword) throws UserNotFoundException, InvalidPasswordException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_password_by_id(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1, id);
+			cs.setString(2, newPassword);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+
 	@Override
 	public boolean updateVerifyPassword(String username, String oldPassword, String newPassword)
 			throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException{
+		return updateVerifyPasswordByUsername(username, oldPassword, newPassword); 
+	}
+	
+	@Override
+	public boolean updateVerifyPasswordByUsername(String username, String oldPassword, String newPassword)
+			throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "{?=call ta_user_verify_update_password(?,?,?)}"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -224,7 +316,32 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public boolean updateVerifyPasswordById(int id, String oldPassword, String newPassword)
+			throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "{?=call ta_user_v_update_pwd_by_id(?,?,?)}"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(2,  id);
+			cs.setString(3, oldPassword);
+			cs.setString(4, newPassword);
+			cs.registerOutParameter(1,  Types.NUMERIC);
+			cs.execute();  
+			if(cs.getInt(1) == 0) {
+				throw new IncorrectPasswordException("Password Not Found"); 
+			}
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
 	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException {
+		return updatePrivilegesToUserByUsername(username); 
+	}
+
+	@Override
+	public boolean updatePrivilegesToUserByUsername(String username) throws UserNotFoundException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update_privileges(?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -236,9 +353,28 @@ public class UserDaoImpl implements UserDao {
 			return false; 
 		}
 	}
-
+	
 	@Override
-	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException {
+	public boolean updatePrivilegesToUserById(int id) throws UserNotFoundException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_priv_by_id(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1, id);
+			cs.setString(2, Privileges.USER.name());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException { 
+		return updatePrivilegesToAdminByUsername(username);
+	}
+	
+	@Override
+	public boolean updatePrivilegesToAdminByUsername(String username) throws UserNotFoundException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update_privileges(?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -250,9 +386,28 @@ public class UserDaoImpl implements UserDao {
 			return false; 
 		}
 	}
+	
+	@Override
+	public boolean updatePrivilegesToAdminById(int id) throws UserNotFoundException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_priv_by_id(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1, id);
+			cs.setString(2, Privileges.ADMIN.name());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
 
 	@Override
 	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException {
+		return updateEmailByUsername(username, email); 
+	}
+	
+	@Override
+	public boolean updateEmailByUsername(String username, String email) throws UserNotFoundException, InvalidEmailException {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
 			String sql = "call ta_user_update_email(?,?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -266,7 +421,26 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public boolean updateEmailById(int id, String email) throws UserNotFoundException, InvalidEmailException {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_email(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setInt(1,  id);
+			cs.setString(2, email);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
+	}
+	
+	@Override
 	public boolean deleteUser(String username) {
+		return deleteUserByUsername(username); 
+	}
+	
+	@Override
+	public boolean deleteUserByUsername(String username) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "{call ta_user_delete(?)}";
 			CallableStatement cs = conn.prepareCall(sql);
@@ -280,4 +454,21 @@ public class UserDaoImpl implements UserDao {
 			}
 		return false;
 	}
+
+	@Override
+	public boolean deleteUserById(int id) {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "{call ta_user_delete_by_id(?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setInt(1, id);
+			cs.execute();
+			return true; 
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();		
+			}
+		return false;
+	}
+
 }
