@@ -14,7 +14,7 @@
   	<filter-name>CorsFilter</filter-name>
   	<display-name>CorsFilter</display-name>
   	<description></description>
-  	<filter-class>com.proj2.corsFilter</filter-class>
+  	<filter-class>com.proj2.corsFilter.CorsFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>CorsFilter</filter-name>
