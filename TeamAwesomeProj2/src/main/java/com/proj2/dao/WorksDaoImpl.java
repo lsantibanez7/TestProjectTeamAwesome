@@ -95,7 +95,7 @@ public class WorksDaoImpl implements WorksDao{
 	}
 	
 	@Override
-	public List<Works> getWorksAllByUser(String username) throws UserNotFoundException{
+	public List<Works> getWorksUserByUsername(String username) throws UserNotFoundException{
 		System.out.println("WARNING: getWorksAllByUser is more efficient when passing userID as a parameter instead"); 
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sqlUser = "SELECT ta_user_id FROM ta_user WHERE ta_user_username = ?"; 
@@ -129,7 +129,7 @@ public class WorksDaoImpl implements WorksDao{
 	}
 
 	@Override
-	public List<Works> getWorksAllByUser(int userId) throws UserNotFoundException{
+	public List<Works> getWorksUserById(int userId) throws UserNotFoundException{
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			String sql = "SELECT * FROM ta_works WHERE ta_works_user_id = ?";
