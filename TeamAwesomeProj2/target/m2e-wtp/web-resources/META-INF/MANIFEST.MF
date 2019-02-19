@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+<<<<<<< HEAD:testTeamAwesome/target/classes/META-INF/MANIFEST.MF
+Built-By: druus
+=======
+Built-By: losan
+>>>>>>> 5d4d4af7d6aedc022816e32e4395480eaedbc0ff:TeamAwesomeProj2/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+Build-Jdk: 1.8.0_191
+Created-By: Maven Integration for Eclipse
+
