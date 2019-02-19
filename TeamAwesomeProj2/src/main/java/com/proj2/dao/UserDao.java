@@ -26,15 +26,15 @@ public interface UserDao {
 	public List<User> getUserAll();	// 100%, untested
 
 	// UPDATE methods
-	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; // 0% 
-	public boolean updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException; // 0% 
-	public boolean updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException; // 0%
-	public boolean updateVerifyPassword(String username, String oldPassword, String newPassword) throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException; // 0%
-	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException; // 0%
-	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException; // 0%
-	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException; //0% 
+	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException; // 100% untested 
+	public boolean updateUsername(String username, String newUsername) throws UserNotFoundException, InvalidUsernameException; // 100% untested 
+	public boolean updatePassword(String username, String newPassword) throws UserNotFoundException, InvalidPasswordException; // 100% untested
+	public boolean updateVerifyPassword(String username, String oldPassword, String newPassword) throws UserNotFoundException, IncorrectPasswordException, InvalidPasswordException; // 100% tested
+	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException; // 100% untested
+	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException; // 100% untested
+	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException; // 100% untested 
 
 	// DELETE methods
-	public boolean deleteUser(String username); // 0%
+	public boolean deleteUser(String username); // 100% untested
 
 }

@@ -1,5 +1,7 @@
 package com.proj2.dao;
 
+import java.util.List;
+
 import com.proj2.model.Works;
 
 public interface WorksDao {
@@ -9,6 +11,7 @@ public interface WorksDao {
 	
 	// READ methods
 	public Works getWorks(int id);
+	public List<Works> getWorksAll(); 
 	
 	// UPDATE methods
 	public boolean updateComment(String comment); 

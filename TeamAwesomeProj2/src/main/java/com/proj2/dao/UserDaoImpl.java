@@ -127,7 +127,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<User> getUserAll() {
-		System.out.println("getAllUsers is called properly");
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			String sql = "SELECT * FROM ta_user";

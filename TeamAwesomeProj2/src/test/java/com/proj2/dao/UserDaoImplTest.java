@@ -105,10 +105,11 @@ public class UserDaoImplTest {
 	@Test
 	public void testUpdateVerifyPasswordSuccessfullyChangesPassword() {
 		try {
+			UserDaoImpl.getInstance().deleteUser("test6"); 
 			UserDaoImpl.getInstance().insertUser("test6", "test6pass", "username1@uname.edu");
 			int auth1 = UserDaoImpl.getInstance().authenticateLogIn("test6", "test6-altered-password"); 
 			assertEquals(auth1, 2); 
-			assertFalse(UserDaoImpl.getInstance().updateVerifyPassword("test6", "test6pass", "test6-altered-password")); 
+			assertTrue(UserDaoImpl.getInstance().updateVerifyPassword("test6", "test6pass", "test6-altered-password")); 
 			int auth2 = UserDaoImpl.getInstance().authenticateLogIn("test6", "test6-altered-password"); 
 			assertEquals(auth2, 3); 
 			UserDaoImpl.getInstance().deleteUser("test6"); 
