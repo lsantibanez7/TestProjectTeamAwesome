@@ -3,14 +3,14 @@ package com.proj2.model;
 public class Works {
 
 	private int id;
-	private String url;
+	private int apiId;
 	private String comment;
 	private int userId;
 	
 	
-	public Works(int id, String url, String comment, int userId) {
+	public Works(int id, int apiId, String comment, int userId) {
 		this.id = id;
-		this.url = url;
+		this.apiId = apiId;
 		this.comment = comment;
 		this.userId = userId;
 	}
@@ -26,13 +26,13 @@ public class Works {
 	}
 
 
-	public String getUrl() {
-		return url;
+	public int getApiId() {
+		return apiId;
 	}
 
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setApiId(int apiId) {
+		this.apiId = apiId;
 	}
 
 
@@ -62,7 +62,7 @@ public class Works {
 		int result = 1;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + apiId;
 		result = prime * result + userId;
 		return result;
 	}
@@ -84,11 +84,8 @@ public class Works {
 			return false;
 		if (id != other.id)
 			return false;
-		if (url == null) {
-			if (other.url != null)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
+		if (apiId != other.apiId)
+			return false; 
 		if (userId != other.userId)
 			return false;
 		return true;
@@ -97,7 +94,7 @@ public class Works {
 
 	@Override
 	public String toString() {
-		return "Works [id=" + id + ", url=" + url + ", comment=" + comment + ", userId=" + userId + "]";
+		return "Works [id=" + id + ", url=" + apiId + ", comment=" + comment + ", userId=" + userId + "]";
 	}
 	
 }

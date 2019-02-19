@@ -15,7 +15,6 @@ import com.proj2.model.User;
 
 public class UserServiceImpl implements UserService{
 
-	//private final DataSource dataSource = DataSource.getInstance();
 	
 	
 	public Object attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {

@@ -127,7 +127,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<User> getUserAll() {
-		System.out.println("getAllUsers is called properly");
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			String sql = "SELECT * FROM ta_user";
@@ -160,15 +159,33 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update(?,?,?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, user.getUsername());
+			cs.setString(3, user.getPrivileges().name());
+			cs.setString(4, user.getEmail());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
 	public boolean updateUsername(String username, String newUsername)
 			throws UserNotFoundException, InvalidUsernameException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_username(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, newUsername);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
@@ -208,20 +225,44 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean updatePrivilegesToUser(String username) throws UserNotFoundException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_privileges(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, Privileges.USER.name());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
 	public boolean updatePrivilegesToAdmin(String username) throws UserNotFoundException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_privileges(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, Privileges.ADMIN.name());
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
 	public boolean updateEmail(String username, String email) throws UserNotFoundException, InvalidEmailException {
-		// TODO Auto-generated method stub
-		return false;
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){ 
+			String sql = "call ta_user_update_email(?,?)"; 
+			CallableStatement cs = conn.prepareCall(sql); 
+			cs.setString(1,  username);
+			cs.setString(2, email);
+			cs.execute();  
+			return true; 
+		} catch (SQLException e) {
+			return false; 
+		}
 	}
 
 	@Override
