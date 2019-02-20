@@ -10,7 +10,7 @@ export class LoginService {
 
  
 
-  url = 'http://52.15.180.249:8080/Project2/';
+  url = 'http://52.15.180.249:8080/Project2/login';
   // doLogin(login: Login){
   //   this.http.post<any>(this.url, login);
   // }
