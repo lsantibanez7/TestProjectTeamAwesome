@@ -1,12 +1,17 @@
 .carousel{
-    width:640px;
-    height:360px;
+    width:100%;
+    height:10%;
 }
 
 img{
-    width: 100%;
-    height: 100%;
+    width: 30%;
+    object-fit: cover;
 }
+
+.column {
+    width: 100%;
+    padding: 5px;
+} 
 
 .jumbotron{
     background-color: #BD804D;
