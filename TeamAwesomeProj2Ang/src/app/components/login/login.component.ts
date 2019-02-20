@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   //userModel = new User("lauramrv1994@yahoo.com",'password');
 
-  private User: any = {};
+  public User: any = {};
 
   constructor(private loginService: LoginService) {}
   onSubmit() {
