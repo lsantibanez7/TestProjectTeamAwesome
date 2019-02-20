@@ -18,6 +18,7 @@
 
 #artButton {
     text-align: center;
+    
 }
 
 
@@ -29,6 +30,10 @@
 .buttonDiv {
     justify-content: center;
     
+}
+
+#all-container{
+    background-color: #25292B;
 }
 
 

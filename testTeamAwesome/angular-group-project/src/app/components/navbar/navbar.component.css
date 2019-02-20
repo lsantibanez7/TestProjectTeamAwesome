@@ -1,10 +1,10 @@
 
-
+/* 
 .nav-item{
     color: #261933;
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 20px;
-    /* border: 2px solid #BD804D ; */
+    margin: 18px;
+    
     border-radius: 10%;
     padding: 5px;
     background-color: #F5F4EF;
@@ -12,20 +12,27 @@
 
 .nav-item:hover{
     border: 2px solid #883000 ;
-}
+} */
 
 
 link a:hover{
 
 }
 
-/* ul{
-    background-color:  rgba(160, 180, 189, 0.377);
-} */
 nav{
-    background-color:  rgb(160, 180, 189);
+    background-color:  #25292B;
 }
 
+
 #logotemp{
-    background-color: #883000;
+    background-color: #999691;
+}
+#login-form{
+    width: 250px;
+    margin: 0px;
+ 
+}
+
+#dropdownform{
+    padding: 0px;
 }

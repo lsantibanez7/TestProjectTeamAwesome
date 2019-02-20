@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Injectable } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service'
 import { User } from 'src/app/user';
 
@@ -17,7 +16,7 @@ import { User } from 'src/app/user';
 
 export class LoginComponent implements OnInit {
 
-  userModel = new User("lauramrv1994@yahoo.com",'password');
+  userModel = new User('','');
 
   constructor(private loginService: LoginService) {}
   onSubmit() {

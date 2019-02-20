@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+import { UserLogged } from 'src/app/user-logged';
+import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  userModelNew = new UserLogged('','','');
+  constructor(private registrationService : RegistrationService) { }
+  onSubmit() {
+    this.registrationService.send( this.userModelNew)
+      .subscribe(
+        data => console.log('Success',data)
+   
+      )
+  }
 
   ngOnInit() {
   }
