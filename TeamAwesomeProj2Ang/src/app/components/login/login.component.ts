@@ -17,11 +17,14 @@ import { User } from 'src/app/user';
 
 export class LoginComponent implements OnInit {
 
-  userModel = new User("lauramrv1994@yahoo.com",'password');
+  //userModel = new User("lauramrv1994@yahoo.com",'password');
+
+  private User: any = {};
 
   constructor(private loginService: LoginService) {}
   onSubmit() {
-    this.loginService.send( this.userModel)
+    console.log(this.User);
+    this.loginService.send(this.User)
       .subscribe(
         data => console.log('Success',data)
    
