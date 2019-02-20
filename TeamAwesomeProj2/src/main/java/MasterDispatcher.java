@@ -22,7 +22,7 @@ private MasterDispatcher() {}
 		
 		
 		
-		if(request.getRequestURI().contains("Authorize")) {
+		if(request.getRequestURI().contains("login")) {
 			return userservice.attemptAuthentication(request, response);
 		}else if(request.getRequestURI().contains("Register")) {
 			return userservice.register(request, response);
