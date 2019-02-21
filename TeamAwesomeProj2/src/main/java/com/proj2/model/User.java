@@ -6,7 +6,26 @@ public class User {
 	private String username;
 	private Privileges privileges; 
 	private String email; 
+	private String password;
+	private String newUsername;
+	private String newPassword;
 	
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User(int id, String username, Privileges privileges, String email) {
 		super();
 		this.id = id;  
@@ -15,6 +34,14 @@ public class User {
 		this.email = email;
 	}
 	
+	public String getNewUsername() {
+		return newUsername;
+	}
+
+	public void setNewUsername(String newUsername) {
+		this.newUsername = newUsername;
+	}
+
 	public User() {
 		super(); 
 	}
@@ -54,7 +81,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", privileges=" + privileges + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", privileges=" + privileges + ", email=" + email
+				+ ", password=" + password + ", newUsername=" + newUsername + ", newPassword=" + newPassword + "]";
 	}
 	
 	private String wordFit(String word, int len) {
