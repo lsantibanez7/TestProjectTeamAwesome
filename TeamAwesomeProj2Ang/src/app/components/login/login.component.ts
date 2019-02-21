@@ -23,12 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService) {}
   onSubmit() {
     console.log(this.User);
-    this.loginService.send(this.User.username, this.User.password)
-      .subscribe(
-        data => console.log('Success',data)
-   
-      )
-  }
+    this.loginService.send(this.User.username, this.User.password)  }
  ngOnInit() {
   }
 
