@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-//import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserLogged } from 'src/app/user-logged';
+import {RegistrationService} from 'src/app/services/registration.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -7,8 +10,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  userModelNew = new UserLogged('','','');
+  
+  constructor(private registrationService : RegistrationService) { }
+  onSubmit() {
+    this.registrationService.send( this.userModelNew)
+      .subscribe(
+        data => console.log('Success',data)
+   
+      )
+  }
 
   ngOnInit() {
   }
