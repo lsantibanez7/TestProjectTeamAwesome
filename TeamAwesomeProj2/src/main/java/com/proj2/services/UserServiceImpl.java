@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
 			System.out.println(next.toString());
 			return next;
 		}else {
-			return null;
+			return "did not make it past numret authenication";
 		}
 	}
 
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
 					
 					setUser = UserDaoImpl.getInstance().getUser(username);
 					request.getSession().setAttribute("id", setUser.getId());
-					return true;
+					return setUser;
 				} catch (UserNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService{
 		
 		
 		
-		return false;
+		return null;
 	}
 
 	@Override

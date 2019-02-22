@@ -54,7 +54,7 @@ private MasterDispatcher() {}
 	
 	public static Object doput(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {
 		
-		if(request.getRequestURI().contains("Authorize")) {
+		if(request.getRequestURI().contains("login")) {
 			return userservice.attemptAuthentication(request, response);
 		}else if(request.getRequestURI().contains("Register")) {
 			return userservice.register(request, response);
@@ -112,7 +112,7 @@ private MasterDispatcher() {}
 	
 	public static Object dodelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {
 		
-		if(request.getRequestURI().contains("Authorize")) {
+		if(request.getRequestURI().contains("login")) {
 			return userservice.attemptAuthentication(request, response);
 		}else if(request.getRequestURI().contains("Register")) {
 			return userservice.register(request, response);
