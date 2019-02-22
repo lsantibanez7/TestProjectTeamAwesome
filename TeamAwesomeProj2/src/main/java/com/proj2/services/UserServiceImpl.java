@@ -265,7 +265,7 @@ public class UserServiceImpl implements UserService{
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 		
