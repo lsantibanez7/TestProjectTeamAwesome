@@ -16,6 +16,7 @@ import { ViewByMuseumComponent } from './components/view-by-museum/view-by-museu
 import { from } from 'rxjs';
 import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
 
 
 
@@ -30,7 +31,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     ViewByArtistComponent,
     ViewByMuseumComponent,
     LoggedNavbarComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserHomeComponent
   ],
   imports: [
     BrowserModule,

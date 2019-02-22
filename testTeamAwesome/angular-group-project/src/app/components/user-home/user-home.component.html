@@ -1,0 +1,147 @@
+<!-- navbar for when a user is logged in -->
+<app-logged-navbar></app-logged-navbar>
+
+<!-- ***make it for userhome -->
+<div class="container-fluid">
+  <div class="row" id="jumbotron-bg">
+      <div class="col-md-9">
+              <div class="jumbotron mt-5" id="jumbotron-mission">
+                  <h1 class="display-4">Welcome to the User Home page</h1>
+                  <p class="lead">This is the features you can do</p>
+                  <hr class="my-4">
+                  <p>This is a description of  a few features</p>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationForm">
+                      Empty Button
+                  </button> 
+               </div>  
+      </div>
+ 
+      <div class="col-md-3">
+          <div class="card mt-5" id="next-to-jumbotron"></div>
+      </div>
+  </div>
+</div>
+<!-- ***change this to be favorite artworks, involves db and favorites button -->
+<div class="col-md-12" *ngIf="isHidden">
+  <!-- Move this to maria's navbar somehow???-->
+  <article>
+    <h2><span>Artists:</span></h2>
+    <select (change)="selectChangeHandler($event)">
+      <option value="Any">Any</option>
+      <option value="Gustave Moreau">Gustave Moreau</option>
+      <option value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</option>
+      <option value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</option>
+      <option value="Roland Bonaparte">Roland Bonaparte</option>
+      <option value="Léonard de Vinci">Léonard de Vinci</option>
+  </select>
+  </article>
+  <article>
+      <h6><span>Museums: </span></h6>
+      <select (change)="selectChangeHandler2($event)">
+        <option value="Any">Any</option>
+        <option value="Musée du Louvre">Musée du Louvre</option>
+        <option value="Paris, musée du quai Branly - Jacques Chirac">Paris, musée du quai Branly</option>
+        <option value="musée d'Orsay">musée d'Orsay</option>
+        <option value="Versailles, châteaux de Versailles et de Trianon">Versailles</option>
+        <option value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</option>
+      </select>
+    </article>
+    <button class="btn btn-light" (click)="searchItems()">Search</button>
+   
+    <!--Artwork by 10 at a time-->
+  <div class="row">
+    <div class="column">
+      <div class="card c">
+        <img class="card-img-top" [src]="zeroImage">
+      <div class="card-body">
+          <h5> {{ zeroTitle }} </h5>
+          <p>Done by: {{ zeroCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card c">
+        <img class="card-img-top" [src]="firstImage">
+        <div class="card-body">
+          <h5> {{ firstTitle }} </h5>
+          <p>Done by: {{ firstCreator }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card c">
+        <img class="card-img-top" [src]="secondImage">
+        <div class="card-body">
+          <h5> {{ secondTitle }} </h5>
+          <p>Done by: {{ secondCreator }}</p>
+        </div>
+      </div>
+    </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="thirdImage">
+      <div class="card-body">
+        <h5> {{ thirdTitle }} </h5>
+        <p>Done by: {{ thirdCreator }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="fourthImage">
+      <div class="card-body">
+        <h5> {{ fourthTitle }} </h5>
+        <p>Done by: {{ fourthCreator }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="fifthImage">
+      <div class="card-body">
+        <h5> {{ fifthTitle }} </h5>
+        <p>Done by: {{ fifthCreator }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="sixImage">
+      <div class="card-body">
+        <h5> {{ sixTitle }} </h5>
+        <p>Done by: {{ sixCreator }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="sevenImage">
+      <div class="card-body">
+        <h5> {{ sevenTitle }} </h5>
+        <p>Done by: {{ sevenCreator }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="eightImage">
+      <div class="card-body">
+        <h5> {{ eightTitle }} </h5>
+        <p>Done by: {{ eightCreator }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card c">
+      <img class="card-img-top" [src]="nineImage">
+      <div class="card-body">
+        <h5> {{ nineTitle }} </h5>
+        <p>Done by: {{ nineCreator }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div> 
+<!-- end favorites section -->

@@ -8,15 +8,16 @@ import { User } from 'src/app/user';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  userModel = new User('lauramrv1994@yahoo.com','password');
+  public User : any = {};
 
   constructor(private loginService: LoginService) { }
   onSubmit() {
-    this.loginService.send( this.userModel)
-      .subscribe(
-        data => console.log('Success',data)
+    console.log(this.User);
+    this.loginService.send( this.User.username, this.User.password)
+      // .subscribe(
+      //   data => console.log('Success',data)
    
-      )
+      // )
   }
 
   ngOnInit() {

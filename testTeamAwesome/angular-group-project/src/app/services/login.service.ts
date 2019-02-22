@@ -11,14 +11,14 @@ export class LoginService {
  
 
   url = 'http://52.15.180.249:8080/Project2/';
-  // doLogin(login: Login){
-  //   this.http.post<any>(this.url, login);
-  // }
+
 
   
   constructor(private _http: HttpClient) { }
-  send(user: User){
-   let obs= this._http.post<any>(this.url,user);
+  send(username: string, password: string){
+   let obs= this._http.post<any>(this.url,{username : username, password : password })
+    .subscribe(data => {console.log(data)});
+
    return obs;
   }
 }

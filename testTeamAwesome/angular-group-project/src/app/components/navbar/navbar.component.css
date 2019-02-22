@@ -1,18 +1,21 @@
 
-/* 
+
 .nav-item{
-    color: #261933;
+    color: black;
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 18px;
     
     border-radius: 10%;
     padding: 5px;
-    background-color: #F5F4EF;
+   
 }
-
-.nav-item:hover{
-    border: 2px solid #883000 ;
-} */
+.nav-item:hover {
+    -webkit-transform:translate(0px,-5px);
+    -moz-transform:translate(0px,-5px);
+    -ms-transform:translate(0px,-5px);
+    -o-transform:translate(0px,-5px);
+    transform:translate(0px,-5px);
+  }
 
 
 link a:hover{
