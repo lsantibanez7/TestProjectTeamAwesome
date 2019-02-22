@@ -24,7 +24,7 @@ export class ViewAllArtworksComponent implements OnInit {
 
   public isHidden: boolean;
 
-  //museum = ['Musée du Louvre', 'Paris, musée du quai Branly - Jacques Chirac', 'musée d\'Orsay','Versailles, châteaux de Versailles et de Trianon'];
+  //museum = ['MusÃ©e du Louvre', 'Paris, musÃ©e du quai Branly - Jacques Chirac', 'musÃ©e d\'Orsay','Versailles, chÃ¢teaux de Versailles et de Trianon'];
 
   public person: string;
   public place: string;
@@ -90,6 +90,24 @@ export class ViewAllArtworksComponent implements OnInit {
 
     this.loadInfo();
 
+  }
+
+  firstPage() : any {
+    this.Photos = this.configService.pageOne(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
+  secondPage() : any {
+    this.Photos = this.configService.pageTwo(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
+  thirdPage() : any {
+    this.Photos = this.configService.pageThree(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
   }
 
   prevPage() : any {

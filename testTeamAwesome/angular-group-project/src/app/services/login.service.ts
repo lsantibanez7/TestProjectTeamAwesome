@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
+//import { Routes } from '@angular/router';
 
 //import { LoginComponent } from './login';
 @Injectable({
@@ -14,10 +15,17 @@ export class LoginService {
 
 
   
-  constructor(private _http: HttpClient) { }
+  constructor( private _http: HttpClient) { }
   send(username: string, password: string){
    let obs= this._http.post<any>(this.url,{username : username, password : password })
-    .subscribe(data => {console.log(data)});
+  .subscribe(data => {
+    console.log(data)
+    if(data == null){
+      console.log("null object");
+    }else{
+      console.log("real object");
+    }
+  });
 
    return obs;
   }

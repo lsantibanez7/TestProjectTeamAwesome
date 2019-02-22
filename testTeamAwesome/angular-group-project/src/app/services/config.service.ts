@@ -29,8 +29,104 @@ export class ConfigService {
   getConfig(){
     console.log("API call for all works");
     this.pageNum = 1;
-    let obs = this.http.get(this.configUrl, this.httpOptions);
+    let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum, this.httpOptions);
     return obs;
+  }
+
+  pageOne(person, place) {
+
+    this.pageNum = 1;
+    if (person == ""){
+      person = "Any";
+    }
+    if (place == ""){
+      place = "Any";
+    }
+    console.log("API uppage call with page parameters");
+    switch(person){
+      case "Any": 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place, this.httpOptions);
+          return obs;
+        }
+      default: 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkA + person, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place + this.junkA + person, this.httpOptions);
+          return obs;
+        }
+    }
+  }
+
+  pageTwo(person, place) {
+
+    this.pageNum = 2;
+    if (person == ""){
+      person = "Any";
+    }
+    if (place == ""){
+      place = "Any";
+    }
+    console.log("API uppage call with page parameters");
+    switch(person){
+      case "Any": 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place, this.httpOptions);
+          return obs;
+        }
+      default: 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkA + person, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place + this.junkA + person, this.httpOptions);
+          return obs;
+        }
+    }
+  }
+
+  pageThree(person, place) {
+
+    this.pageNum = 3;
+    if (person == ""){
+      person = "Any";
+    }
+    if (place == ""){
+      place = "Any";
+    }
+    console.log("API uppage call with page parameters");
+    switch(person){
+      case "Any": 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place, this.httpOptions);
+          return obs;
+        }
+      default: 
+        switch(place){
+          case "Any":
+          let obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkA + person, this.httpOptions);
+          return obs;
+          default:
+          obs = this.http.get(this.configUrl + this.pagePara + this.pageNum + this.junkL + place + this.junkA + person, this.httpOptions);
+          return obs;
+        }
+    }
   }
 
   getItems(loc, person){

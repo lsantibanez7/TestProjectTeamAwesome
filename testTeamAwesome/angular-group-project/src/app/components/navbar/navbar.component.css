@@ -1,15 +1,15 @@
 
 
-.nav-item{
-    color: black;
-    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+.nav-link{
+    color: #6980AA;
+    font-family: 'Cinzel Decorative', cursive;
     margin: 18px;
     
     border-radius: 10%;
     padding: 5px;
    
 }
-.nav-item:hover {
+.nav-link:hover {
     -webkit-transform:translate(0px,-5px);
     -moz-transform:translate(0px,-5px);
     -ms-transform:translate(0px,-5px);

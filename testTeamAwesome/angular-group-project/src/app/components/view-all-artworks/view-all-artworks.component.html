@@ -1,12 +1,37 @@
 <div class="container-fluid" id="all-container">
   <div class="row justify-content-md-center">
     <div class="col-md-12">
-      
-      <button class="btn btn-light" (click)="prevPage()"> << </button> 
-   <!-- <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button>-->
-      <div class="col-md-5">
-        <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button>
+     <!-- <button class="btn btn-light" style="float: left" (click)="prevPage()"> << </button> -->
+     <div class="row justify-content-md-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg">
+              <li class="page-item">
+                <a class="page-link" (click)="prevPage()" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" (click)="firstPage()">1</a></li>
+              <li class="page-item"><a class="page-link" (click)="secondPage()">2</a></li>
+              <li class="page-item"><a class="page-link" (click)="thirdPage()">3</a></li>
+              <li class="page-item">
+                <a class="page-link" (click)="nextPage()" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        
+    <!--  <button class="btn-info" (click)="firstPage()">1</button>
+      <button class="btn-info" (click)="secondPage()">2</button>
+      <button class="btn-info col-md-1" (click)="thirdPage()">3</button>
+      <button class="btn-info col-md-1" (click)="fourthPage()">4</button>
+      <button class="btn-info col-md-1" (click)="jumpPages()"> > </button>
+      <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
       </div>
+    <!-- <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button> -->
+      <!--<div class="col-md-offset-1">-->
+        <!-- <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
+      <!--</div>-->
     </div>
 
   <div class="col-md-12">
@@ -137,6 +162,34 @@
       </div>
     </div>
   </div>
-  </div> 
+</div> 
+<div class="row justify-content-md-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-lg">
+          <li class="page-item">
+            <a class="page-link" (click)="prevPage()" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" (click)="firstPage()">1</a></li>
+          <li class="page-item"><a class="page-link" (click)="secondPage()">2</a></li>
+          <li class="page-item"><a class="page-link" (click)="thirdPage()">3</a></li>
+          <li class="page-item">
+            <a class="page-link" (click)="nextPage()" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+<!--<div class="col-md-12">
+  <button class="btn btn-light" style="float: left" (click)="prevPage()"> << </button> 
+  
+ <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button> 
+  <div class="col-md-offset-5">
+    <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button>
+  </div>
+</div>-->
 </div>
+
 </div>

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "lighthouse-c1": "node-modules/lighthouse/;ighthouse-cli/index.js --output"
   },
   "private": true,
   "dependencies": {

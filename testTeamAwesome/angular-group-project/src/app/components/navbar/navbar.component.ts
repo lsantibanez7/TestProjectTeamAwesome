@@ -8,16 +8,32 @@ import { User } from 'src/app/user';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   public User : any = {};
 
+  selectedArtist: string = "";
+
+  selectedPlace: string = "";
+
+  selectChangeHandler (event: any) {
+    this.selectedArtist = event.target.value;
+  }
+
+  selectChangeHandler2 (event: any) {
+    this.selectedPlace = event.target.value;
+  }
+
+
   constructor(private loginService: LoginService) { }
+
+  onPlace() {
+    this.selectChangeHandler2(event);
+    console.log("Testing place: " + this.selectedPlace);
+  }
+
   onSubmit() {
     console.log(this.User);
-    this.loginService.send( this.User.username, this.User.password)
-      // .subscribe(
-      //   data => console.log('Success',data)
-   
-      // )
+    this.loginService.send(this.User.username, this.User.password)
   }
 
   ngOnInit() {
