@@ -1,0 +1,49 @@
+.carousel{
+    max-height: 300px;
+  
+
+}
+#carouselbg{
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+
+
+.carousel-inner-block {
+    max-height: 300px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+
+.bd-example {
+    margin-bottom: 10px;
+
+    overflow: hidden;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.jumbotron{
+    background-color: #FCB97D;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+   
+}
+
+#next-to-jumbotron{
+    background-color: #FCB97D;
+    height: 360px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+
+.jumbotron:hover{
+  
+}
+
+#jumbotron-bg{
+    background-color: #54524F;
+}
+
+#missionjumbotron{
+    padding: 10px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}

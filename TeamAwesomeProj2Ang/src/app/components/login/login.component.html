@@ -1,0 +1,24 @@
+<div class="container-fluid mb-5"> 
+  <h1>Login Form</h1>
+      <form #loginForm="ngForm"(ngSubmit)="onSubmit()" novalidate> 
+        <p>This right here is a json pipe!!!</p> 
+       {{loginForm.value | json}} 
+       <hr />
+       {{User | json}}
+       <hr />
+    
+         
+        <div class="form-group">
+          <label>Username</label>
+          <input type="username" required #username="ngModel" [class.is-invalid]="username.invalid" class="form-control" name ="username" [(ngModel)]="User.username">
+      </div>     
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" required #password="ngModel" [class.is-invalid]="password.invalid" class="form-control" name="password" [(ngModel)]="User.password">
+      </div>
+      <div>
+      <button type="submit" class="btn btn-primary">Log In</button>
+      </div> 
+    </form>
+</div>  
+
