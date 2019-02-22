@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService{
 			System.out.println(next.toString());
 			return next;
 		}else {
-			return "did not make it past numret authenication and this is numret: " + numret;
+			return "did not make it past numret authenication and this is numret: " + numret + "/n"
+					+ "this is the username: " + username + "this is the password: " + password;
 		}
 	}
 
