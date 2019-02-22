@@ -8,9 +8,10 @@ import { User } from '../user';
 })
 export class LoginService {
 
- 
-  url = 'http://localhost:8080/TeamAwesomeProj2/proj2/login'
-  //url = 'http://52.15.180.249:8080/TeamAwesomeProj2/proj2/login';
+
+
+  url = 'http://52.15.180.249:8080/proj2/proj2/login';
+
   // doLogin(login: Login){
   //   this.http.post<any>(this.url, login);
   // }
