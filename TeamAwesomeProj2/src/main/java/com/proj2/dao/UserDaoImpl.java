@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 			e.getErrorCode();
 			e.printStackTrace();
 		}
-		return 0;
+		return 3;
 	}
 	
 	// CREATE METHODS 
