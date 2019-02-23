@@ -120,8 +120,17 @@ public class UserServiceImpl implements UserService{
 		String api_id = "";
 		String comment = "";
 		
+		User view = null;
+		try {
+			view = UserDaoImpl.getInstance().getUser(obj);
+		} catch (UserNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			Works work = mapper.readValue(request.getReader(), Works.class);
+			
 			api_id = work.getApiId();
 			comment = work.getComment();
 		
@@ -131,7 +140,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		
-		return WorksDaoImpl.getWoDa().saveWorks(obj, api_id, comment);
+		return WorksDaoImpl.getWoDa().saveWorks(api_id, comment, view.getId());
 	}
 
 	@Override

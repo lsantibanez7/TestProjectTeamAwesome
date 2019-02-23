@@ -14,27 +14,24 @@ import com.proj2.model.Works;
 import com.proj2.util.JDBSCConnectionUtil;
 
 public class WorksDaoImpl implements WorksDao{
-	
-	private static WorksDaoImpl getWo;
+
+	private static WorksDaoImpl getWo; 
 	
 	public static WorksDaoImpl getWoDa() {
 		if(getWo == null) {
-			getWo = new WorksDaoImpl();
+			getWo = new WorksDaoImpl(); 
 		}
-		
-		return getWo;
+		return getWo; 
 	}
 	
-	
-	
 	@Override
-	public boolean saveWorks(String username, String api_id, String comment) {
+	public boolean saveWorksB(String api_id, String comment, int userId) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			CallableStatement cs = conn.prepareCall("{?=call ta_insert_works(?,?,?)"); 
-			cs.setString(2, username);
-			cs.setString(3, api_id);
-			cs.setString(4, comment);
+			cs.setString(2, api_id);
+			cs.setString(3, comment);
+			cs.setInt(4, userId);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.executeUpdate();
 			return true;
@@ -42,6 +39,29 @@ public class WorksDaoImpl implements WorksDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false; 
+		}
+	}
+	
+	@Override
+	public Works saveWorks(String api_id, String comment, int userId) {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall("{?=call ta_insert_works(?,?,?)"); 
+			cs.setString(2, api_id);
+			cs.setString(3, comment);
+			cs.setInt(4, userId);
+			cs.registerOutParameter(1, Types.NUMERIC);
+			cs.executeUpdate();
+			return new Works(
+					cs.getInt(1), 
+					api_id, 
+					comment, 
+					userId 
+					);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null; 
 		}
 	}
 
@@ -95,6 +115,7 @@ public class WorksDaoImpl implements WorksDao{
 		return new ArrayList<>();
 	}
 	
+	@Override
 	public List<Works> getWorksUserByUsername(String username) throws UserNotFoundException{
 		System.out.println("WARNING: getWorksAllByUser is more efficient when passing userID as a parameter instead"); 
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
@@ -127,9 +148,37 @@ public class WorksDaoImpl implements WorksDao{
 		}
 		return new ArrayList<>();
 	}
+
+	@Override
+	public List<Works> getWorksUserById(int userId) throws UserNotFoundException{
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			String sql = "SELECT * FROM ta_works WHERE ta_works_user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet results = ps.executeQuery();
+			
+			List<Works> allWorks = new ArrayList<>();
+			while(results.next()) {
+				allWorks.add(new Works(
+						results.getInt("ta_works_id"),
+						results.getString("ta_works_api_id"),
+						results.getString("ta_works_comment"),
+						results.getInt("ta_works_user_id"))
+						); 
+			}
+			return allWorks;
+			
+		}catch(SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();
+		}
+		return new ArrayList<>();
+	}
+
 	
 	@Override
-	public boolean updateComment(String comment) {
+	public boolean updateComment(int id, String comment) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sql = "call ta_works_update_comment(?)"; 
 			CallableStatement cs = conn.prepareCall(sql); 
@@ -154,7 +203,4 @@ public class WorksDaoImpl implements WorksDao{
 		}
 		return false; 
 	}
-	
-	
-	
 }
