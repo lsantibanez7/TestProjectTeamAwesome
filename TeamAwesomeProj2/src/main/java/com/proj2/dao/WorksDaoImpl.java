@@ -27,12 +27,12 @@ public class WorksDaoImpl implements WorksDao{
 	}
 	
 	@Override
-	public boolean saveWorks(String username, int api_id, String comment) {
+	public boolean saveWorks(String username, String api_id, String comment) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			CallableStatement cs = conn.prepareCall("{?=call ta_insert_works(?,?,?)"); 
 			cs.setString(2, username);
-			cs.setInt(3, api_id);
+			cs.setString(3, api_id);
 			cs.setString(4, comment);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.executeUpdate();
