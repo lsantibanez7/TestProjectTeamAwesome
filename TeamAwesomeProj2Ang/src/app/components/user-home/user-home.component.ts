@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 
 
 @Component({
-  selector: 'app-view-all-artworks',
-  templateUrl: './view-all-artworks.component.html',
-  styleUrls: ['./view-all-artworks.component.css']
+  selector: 'app-user-home',
+  templateUrl: './view-user-home.component.html',
+  styleUrls: ['./view-user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
 
