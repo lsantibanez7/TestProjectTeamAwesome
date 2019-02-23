@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedNavbarComponent implements OnInit {
 
+
+  public userModel : any = {};
+
   constructor() { }
 
   ngOnInit() {
