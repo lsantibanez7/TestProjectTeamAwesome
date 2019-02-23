@@ -16,8 +16,10 @@ import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.Privileges;
 import com.proj2.model.User;
 
+
+
 public class UserDaoImplTest {
-	// Test that DaoImpl methods make accurate calls to the database
+	// Test that DaoImpl methods make accurate calls to the database  
 	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();

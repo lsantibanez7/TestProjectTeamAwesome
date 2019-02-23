@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.proj2.exception.IncorrectPasswordException;
@@ -29,6 +30,7 @@ public class UserDaoImpl implements UserDao {
 	
 	private UserDaoImpl() {
 		super(); 
+		BasicConfigurator.configure();
 	}
 	
 	public static UserDaoImpl getInstance() {
