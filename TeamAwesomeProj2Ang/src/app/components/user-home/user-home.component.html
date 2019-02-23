@@ -26,27 +26,23 @@
   <!-- Move this to maria's navbar somehow???-->
   <article>
     <h2><span>Artists:</span></h2>
-    <select (change)="selectChangeHandler($event)">
       <option value="Any">Any</option>
       <option value="Gustave Moreau">Gustave Moreau</option>
-      <option value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</option>
+      <option value="AndrÃ©-Adolphe-EugÃ¨ne DisdÃ©ri">Andre-Adolphe</option>
       <option value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</option>
       <option value="Roland Bonaparte">Roland Bonaparte</option>
-      <option value="Léonard de Vinci">Léonard de Vinci</option>
-  </select>
+      <option value="LÃ©onard de Vinci">LÃ©onard de Vinci</option>
   </article>
   <article>
       <h6><span>Museums: </span></h6>
-      <select (change)="selectChangeHandler2($event)">
         <option value="Any">Any</option>
-        <option value="Musée du Louvre">Musée du Louvre</option>
-        <option value="Paris, musée du quai Branly - Jacques Chirac">Paris, musée du quai Branly</option>
-        <option value="musée d'Orsay">musée d'Orsay</option>
-        <option value="Versailles, châteaux de Versailles et de Trianon">Versailles</option>
-        <option value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</option>
-      </select>
+        <option value="MusÃ©e du Louvre">MusÃ©e du Louvre</option>
+        <option value="Paris, musÃ©e du quai Branly - Jacques Chirac">Paris, musÃ©e du quai Branly</option>
+        <option value="musÃ©e d'Orsay">musÃ©e d'Orsay</option>
+        <option value="Versailles, chÃ¢teaux de Versailles et de Trianon">Versailles</option>
+        <option value="Paris, musÃ©e Gustave Moreau">Paris, musÃ©e Gustave Moreau</option>
     </article>
-    <button class="btn btn-light" (click)="searchItems()">Search</button>
+    <button class="btn btn-light">Search</button>
    
     <!--Artwork by 10 at a time-->
   <!--<div class="row">

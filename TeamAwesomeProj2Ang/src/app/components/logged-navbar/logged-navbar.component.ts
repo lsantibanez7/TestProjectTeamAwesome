@@ -15,4 +15,8 @@ export class LoggedNavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit() {
+    
+  }
+
 }
