@@ -1,0 +1,16 @@
+
+#behind-jumbotron{
+    background-color: #54524F;
+}
+
+#jumbotron-userhome{
+    background-color: #779094;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+
+#next-to-jumbotron{
+    background-color: #779094;
+    height: 360px;
+    box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+}
+

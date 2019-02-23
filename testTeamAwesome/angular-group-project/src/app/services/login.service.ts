@@ -16,22 +16,25 @@ export class LoginService {
 
 
   
-  constructor( private _router: Router, private _http: HttpClient) { }
-  send(username: string, password: string){
-   let obs = this._http.post<any>(this.url,{username : username, password : password })
-  .subscribe(data => {
-    console.log(data)
-    if(data == null){
-      console.error("null object");
-    }else{
-      console.log(data)
-      //store active user
-      localStorage.setItem("currentUser", JSON.stringify(data));
-      //route to user home
-      this._router.navigate(["/tempuserhome"])
-    }
-  });
-
-   return obs;
+  constructor(private _router: Router, private _http: HttpClient) { }
+  send(username: string, password: string) {
+    let obs = this._http.post<any>(this.url, { username: username, password: password })
+      .subscribe(data => {
+        console.log(data)
+        if (data == null) {
+          console.error("invalid login");
+        } else {
+          console.log(data)
+          //store active user
+          localStorage.setItem("currentUser", JSON.stringify(data));
+          console.log(localStorage);
+          //route to user home
+          this._router.navigate(["/tempuserhome"])
+        }
+      }
+      );
+  
+  
+  return obs;
   }
 }

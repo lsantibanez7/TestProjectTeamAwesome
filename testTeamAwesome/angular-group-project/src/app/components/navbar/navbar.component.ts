@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
 
   onSubmit() {
     console.log(this.User);
-    this.loginService.send(this.User.username, this.User.password)
+    this.loginService.send(this.User.username, this.User.password);
   }
 
   ngOnInit() {
