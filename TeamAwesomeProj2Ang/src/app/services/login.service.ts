@@ -19,7 +19,6 @@ export class LoginService {
   
   constructor( private _http: HttpClient) { }
   send(username: string, password: string){
-<<<<<<< HEAD
    let obs= this._http.post<any>(this.url,{username : username, password : password })
   .subscribe(data => {
     console.log(data)
@@ -30,13 +29,11 @@ export class LoginService {
     }
   });
 
-=======
     console.log("Hello: ", {username: username, password:password});
    let obs= this._http.post<any>(this.url,{username: username, password: password}).subscribe(data => {
      console.log(data);
    });
    console.log(obs);
->>>>>>> 4e2f45c1be3425e5db3927a4a0a584df288fcf57
    return obs;
    
     }
