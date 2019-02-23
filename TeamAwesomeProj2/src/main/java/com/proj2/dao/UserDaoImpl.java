@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.proj2.exception.IncorrectPasswordException;
 import com.proj2.exception.InvalidEmailException;
 import com.proj2.exception.InvalidPasswordException;
@@ -22,6 +24,8 @@ import com.proj2.util.JDBSCConnectionUtil;
 public class UserDaoImpl implements UserDao {
 	
 	private static UserDaoImpl mInstance;
+	
+	final static Logger log = Logger.getLogger(UserDaoImpl.class); 
 	
 	private UserDaoImpl() {
 		super(); 
@@ -46,13 +50,14 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(3, password);
 			ps.registerOutParameter(1, Types.NUMERIC);
 			ps.executeUpdate();
-
+			log.info("LOGIN ATTEMPT: " + username + " attempted to log in with status code " + ps.getInt(1));
 			return ps.getInt(1);			
 			
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
 			e.printStackTrace();
+			log.fatal("LOGIN ATTEMPT: " + username + " encountered an SQL error ");
 		}
 		return 0;
 	}
@@ -70,10 +75,12 @@ public class UserDaoImpl implements UserDao {
 			cs.setString(5, email);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.executeUpdate();
+			log.info("CREATE USER: SUCCESS! " + username + " created successfully"); 
 			return true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log.info("CREATE USER: FAIL! " + username + " not created");
 			return false; 
 		}
 	}
@@ -92,6 +99,7 @@ public class UserDaoImpl implements UserDao {
 			cs.setString(5, email);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.executeUpdate(); 
+			log.info("CREATE USER: SUCCESS! " + username + " created successfully"); 
 			return new User(
 					cs.getInt(1), 
 					username, 
@@ -100,6 +108,7 @@ public class UserDaoImpl implements UserDao {
 					);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log.info("CREATE USER: FAIL! " + username + " not created");
 			return null; 
 		}
 	}
@@ -187,7 +196,6 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public boolean updateUser(String username, User user) throws UserNotFoundException, InvalidUsernameException {
-		System.out.println("This method will be deprecated; Please use updateUserById (or updateUserByUsername if necessary)");
 		return updateUserByUsername(username, user);
 	}
 
@@ -200,9 +208,11 @@ public class UserDaoImpl implements UserDao {
 			cs.setString(2, user.getUsername());
 			cs.setString(3, user.getPrivileges().name());
 			cs.setString(4, user.getEmail());
-			cs.execute();  
+			cs.execute();
+			log.info("UPDATE USER: SUCCESS! " + username + " updated successfully"); 
 			return true; 
 		} catch (SQLException e) {
+			log.info("UPDATE USER: SUCCESS! " + username + " not updated");
 			return false; 
 		}
 	}
@@ -217,8 +227,10 @@ public class UserDaoImpl implements UserDao {
 			cs.setString(3, user.getPrivileges().name());
 			cs.setString(4, user.getEmail());
 			cs.execute();  
+			log.info("UPDATE USER: SUCCESS! user #" + id + " updated successfully");
 			return true; 
 		} catch (SQLException e) {
+			log.info("UPDATE USER: FAIL! user #" + id + " not updated");
 			return false; 
 		}
 	}
@@ -236,8 +248,10 @@ public class UserDaoImpl implements UserDao {
 			cs.setString(1, username);
 			cs.setString(2, newUsername);
 			cs.execute();  
+			log.info("UPDATE USERNAME: SUCCESS! " + username + "'s username changed to " + newUsername); 
 			return true; 
 		} catch (SQLException e) {
+			log.info("UPDATE USERNAME: FAIL! " + username + " could not change username to " + newUsername);
 			return false; 
 		}
 	}
@@ -250,8 +264,10 @@ public class UserDaoImpl implements UserDao {
 			cs.setInt(1, id);
 			cs.setString(2, newUsername);
 			cs.execute();  
+			log.info("UPDATE USERNAME: SUCCESS! User #" + id + "'s username changed to " + newUsername);
 			return true; 
 		} catch (SQLException e) {
+			log.info("UPDATE USERNAME: FAIL! User #" + id + " could not change username to " + newUsername);
 			return false; 
 		}
 	}
@@ -446,11 +462,13 @@ public class UserDaoImpl implements UserDao {
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setString(1, username);
 			cs.execute();
+			log.info("DELETE USER: SUCCESS! " + username + " removed from database");
 			return true; 
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();		
+			e.printStackTrace();
+			log.info("DELETE USER: FAIL! Unable to remove " + username + " from database");
 			}
 		return false;
 	}
@@ -462,11 +480,13 @@ public class UserDaoImpl implements UserDao {
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setInt(1, id);
 			cs.execute();
+			log.info("DELETE USER: SUCCESS! User #" + id + " removed from database");
 			return true; 
 		} catch (SQLException e) {
 			e.getSQLState();
 			e.getErrorCode();
-			e.printStackTrace();		
+			e.printStackTrace();	
+			log.info("DELETE USER: FAIL! Unable to remove user #" + id + " from database");	
 			}
 		return false;
 	}
