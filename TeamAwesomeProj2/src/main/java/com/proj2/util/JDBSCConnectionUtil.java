@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 
 
@@ -19,7 +19,7 @@ public class JDBSCConnectionUtil {
 	static String superPass;
 	
 	
-	//final static Logger log = Logger.getLogger(JDBSCConnectionUtil.class);
+	final static Logger log = Logger.getLogger(JDBSCConnectionUtil.class);
 	//JDBC = Java Database Connectivity
 	static {
 		try {

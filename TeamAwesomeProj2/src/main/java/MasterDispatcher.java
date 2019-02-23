@@ -5,9 +5,12 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.proj2.exception.UserNotFoundException;
 import com.proj2.services.UserService;
 import com.proj2.services.UserServiceImpl;
+import com.proj2.util.JDBSCConnectionUtil;
 
 
 public class MasterDispatcher {
@@ -17,12 +20,15 @@ private MasterDispatcher() {}
 	
 	//private static final LoginService loginService = new LoginServiceImpl();
 	private static final UserService userservice = new UserServiceImpl();
+	//final static Logger log = Logger.getLogger(JDBSCConnectionUtil.class);
+
 
 	public static Object doget(HttpServletRequest request, HttpServletResponse response) throws SQLException, UserNotFoundException {
 		
 		
 		
 		if(request.getRequestURI().contains("login")) {
+			//log.info("login");
 			return userservice.attemptAuthentication(request, response);
 		}else if(request.getRequestURI().contains("Register")) {
 			return userservice.register(request, response);
