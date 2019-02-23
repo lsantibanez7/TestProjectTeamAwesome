@@ -17,24 +17,11 @@ export class LoginService {
   // }
 
   
-  constructor( private _http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
   send(username: string, password: string){
-   let obs= this._http.post<any>(this.url,{username : username, password : password })
-  .subscribe(data => {
-    console.log(data)
-    if(data == null){
-      console.log("null object");
-    }else{
-      console.log("real object");
-    }
-  });
-
-    console.log("Hello: ", {username: username, password:password});
-   let obs= this._http.post<any>(this.url,{username: username, password: password}).subscribe(data => {
-     console.log(data);
-   });
-   console.log(obs);
+  console.log({username: username, password:password});
+   let obs= this._http.post<any>(this.url,{username: username, password:password})
+   .subscribe(data => {console.log(data)});
    return obs;
-   
-    }
+  }
 }
