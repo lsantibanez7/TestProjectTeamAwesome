@@ -9,7 +9,7 @@ import { RegistrationService } from 'src/app/services/registration.service';
 })
 export class RegistrationComponent implements OnInit {
 
- // user = new UserLogged('','','');
+ // userModelNew = new UserLogged('','','');
   public userLoggedModel : any = {};
 
   constructor(private registrationService : RegistrationService) { }

@@ -1,54 +1,54 @@
 <div class="container-fluid" id="all-container">
   <div class="row justify-content-md-center">
     <div class="col-md-12">
-     <!-- <button class="btn btn-light" style="float: left" (click)="prevPage()"> << </button> -->
-     <div class="row justify-content-md-center">
+      <!-- <button class="btn btn-light" style="float: left" (click)="prevPage()"> << </button> -->
+      <div class="row justify-content-md-center">
         <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-lg">
-              <li class="page-item">
-                <a class="page-link" (click)="prevPage()" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" (click)="firstPage()">1</a></li>
-              <li class="page-item"><a class="page-link" (click)="secondPage()">2</a></li>
-              <li class="page-item"><a class="page-link" (click)="thirdPage()">3</a></li>
-              <li class="page-item">
-                <a class="page-link" (click)="nextPage()" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        
-    <!--  <button class="btn-info" (click)="firstPage()">1</button>
+          <ul class="pagination pagination-lg">
+            <li class="page-item">
+              <a class="page-link" (click)="prevPage()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="firstPage()">1</a></li>
+            <li class="page-item"><a class="page-link" (click)="secondPage()">2</a></li>
+            <li class="page-item"><a class="page-link" (click)="thirdPage()">3</a></li>
+            <li class="page-item">
+              <a class="page-link" (click)="nextPage()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!--  <button class="btn-info" (click)="firstPage()">1</button>
       <button class="btn-info" (click)="secondPage()">2</button>
       <button class="btn-info col-md-1" (click)="thirdPage()">3</button>
       <button class="btn-info col-md-1" (click)="fourthPage()">4</button>
       <button class="btn-info col-md-1" (click)="jumpPages()"> > </button>
       <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
       </div>
-    <!-- <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button> -->
+      <!-- <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button> -->
       <!--<div class="col-md-offset-1">-->
-        <!-- <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
+      <!-- <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
       <!--</div>-->
     </div>
 
-  <div class="col-md-12">
-    <!-- Move this to maria's navbar somehow???-->
-    <article>
-      <h2><span>Artists:</span></h2>
-      <select (change)="selectChangeHandler($event)">
-        <option value="Any">Any</option>
-        <option value="Gustave Moreau">Gustave Moreau</option>
-        <option value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</option>
-        <option value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</option>
-        <option value="Roland Bonaparte">Roland Bonaparte</option>
-        <option value="Léonard de Vinci">Léonard de Vinci</option>
-    </select>
-    </article>
-    <article>
-        <h6><span>Museums: </span></h6>
+    <div class="col-md-12">
+      <!-- Move this to maria's navbar somehow???-->
+      <article>
+        <h6 style="color: white"><span>Artists:</span></h6>
+        <select (change)="selectChangeHandler($event)">
+          <option value="Any">Any</option>
+          <option value="Gustave Moreau">Gustave Moreau</option>
+          <option value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</option>
+          <option value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</option>
+          <option value="Roland Bonaparte">Roland Bonaparte</option>
+          <option value="Léonard de Vinci">Léonard de Vinci</option>
+        </select>
+      </article>
+      <article>
+        <h6 style="color: white"><span>Museums: </span></h6>
         <select (change)="selectChangeHandler2($event)">
           <option value="Any">Any</option>
           <option value="Musée du Louvre">Musée du Louvre</option>
@@ -59,112 +59,118 @@
         </select>
       </article>
       <button class="btn btn-light" (click)="searchItems()">Search</button>
-     
+
+
       <!--Artwork by 10 at a time-->
-    <div class="row">
-      <div class="column">
-        <div class="card c">
-          <!--Testing modal-->
-          <img id="testZero" class="card-img-top" [src]="zeroImage">
-          <div id="zeroModal" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="img00">
-            <div id="caption"></div>
-          </div>
-          <!--Testing-->
-        <div class="card-body">
-            <h5> {{ zeroTitle }} </h5>
-            <p>Done by: {{ zeroCreator }}</p>
+      <div class="row">
+        <div class="column">
+          <div class="card c">
+            <!--Testing modal-->
+            <img type="button" class="card-img-top" data-toggle="modal" data-target="#exampleModalCenter"
+              [src]="zeroImage">
+            <!--Testing-->
+            <div class="card-body">
+              <h5> {{ zeroTitle }} </h5>
+              <p>Done by: {{ zeroCreator }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="column">
-        <div class="card c">
-          <img class="card-img-top" [src]="firstImage">
-          <div class="card-body">
-            <h5> {{ firstTitle }} </h5>
-            <p>Done by: {{ firstCreator }}</p>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter1"
+              [src]="firstImage">
+            <div class="card-body">
+              <h5> {{ firstTitle }} </h5>
+              <p>Done by: {{ firstCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter2"
+              [src]="secondImage">
+            <div class="card-body">
+              <h5> {{ secondTitle }} </h5>
+              <p>Done by: {{ secondCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter3" 
+            [src]="thirdImage">
+            <div class="card-body">
+              <h5> {{ thirdTitle }} </h5>
+              <p>Done by: {{ thirdCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter4"
+             [src]="fourthImage">
+            <div class="card-body">
+              <h5> {{ fourthTitle }} </h5>
+              <p>Done by: {{ fourthCreator }}</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="card c">
-          <img class="card-img-top" [src]="secondImage">
-          <div class="card-body">
-            <h5> {{ secondTitle }} </h5>
-            <p>Done by: {{ secondCreator }}</p>
+      <div class="row">
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter5"
+            [src]="fifthImage">
+            <div class="card-body">
+              <h5> {{ fifthTitle }} </h5>
+              <p>Done by: {{ fifthCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter6"
+            [src]="sixImage">
+            <div class="card-body">
+              <h5> {{ sixTitle }} </h5>
+              <p>Done by: {{ sixCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter7"
+            [src]="sevenImage">
+            <div class="card-body">
+              <h5> {{ sevenTitle }} </h5>
+              <p>Done by: {{ sevenCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter8"
+            [src]="eightImage">
+            <div class="card-body">
+              <h5> {{ eightTitle }} </h5>
+              <p>Done by: {{ eightCreator }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card c">
+            <img class="card-img-top" type="button" data-toggle="modal" data-target="#exampleModalCenter9"
+            [src]="nineImage">
+            <div class="card-body">
+              <h5> {{ nineTitle }} </h5>
+              <p>Done by: {{ nineCreator }}</p>
+            </div>
           </div>
         </div>
       </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="thirdImage">
-        <div class="card-body">
-          <h5> {{ thirdTitle }} </h5>
-          <p>Done by: {{ thirdCreator }}</p>
-        </div>
-      </div>
     </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="fourthImage">
-        <div class="card-body">
-          <h5> {{ fourthTitle }} </h5>
-          <p>Done by: {{ fourthCreator }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="fifthImage">
-        <div class="card-body">
-          <h5> {{ fifthTitle }} </h5>
-          <p>Done by: {{ fifthCreator }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="sixImage">
-        <div class="card-body">
-          <h5> {{ sixTitle }} </h5>
-          <p>Done by: {{ sixCreator }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="sevenImage">
-        <div class="card-body">
-          <h5> {{ sevenTitle }} </h5>
-          <p>Done by: {{ sevenCreator }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="eightImage">
-        <div class="card-body">
-          <h5> {{ eightTitle }} </h5>
-          <p>Done by: {{ eightCreator }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card c">
-        <img class="card-img-top" [src]="nineImage">
-        <div class="card-body">
-          <h5> {{ nineTitle }} </h5>
-          <p>Done by: {{ nineCreator }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> 
-<div class="row justify-content-md-center">
-    <nav aria-label="Page navigation example">
+    <div class="row justify-content-md-center">
+      <nav aria-label="Page navigation example">
         <ul class="pagination pagination-lg">
           <li class="page-item">
             <a class="page-link" (click)="prevPage()" aria-label="Previous">
@@ -182,7 +188,7 @@
         </ul>
       </nav>
     </div>
-<!--<div class="col-md-12">
+    <!--<div class="col-md-12">
   <button class="btn btn-light" style="float: left" (click)="prevPage()"> << </button> 
   
  <button class="btn btn-info col-md-2" (click)="toggle()">Show Artworks </button> 
@@ -190,6 +196,277 @@
     <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button>
   </div>
 </div>-->
-</div>
+  </div>
 
 </div>
+
+<div class="modal " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="zeroImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">{{ zeroCreator }}, (b. {{ zeroBirth }}) <br />{{ zeroTitle }}, {{ zeroDate }} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ zeroTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ zeroCity }}</strong>
+        <br />
+        At the <strong>{{ zeroPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ zeroInfo }}" target="_blank">{{ zeroInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="firstImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle1">{{ firstCreator }}, (b. {{ firstBirth }} )<br />{{ firstTitle }}, {{ firstDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ firstTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ firstCity }}</strong>
+        <br />
+        At the <strong>{{ firstPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ firstInfo }}" target="_blank">{{ firstInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="secondImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle2">{{ secondCreator }}, (b. {{ secondBirth }})<br />{{ secondTitle }}, {{ secondDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ secondTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ secondCity }}</strong>
+        <br />
+        At the <strong>{{ secondPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ secondInfo }}" target="_blank">{{ secondInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle3"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="thirdImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle3">{{ thirdCreator }}, (b. {{ thirdBirth }})<br />{{ thirdTitle }}, {{ thirdDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ thirdTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ thirdCity }}</strong>
+        <br />
+        At the <strong>{{ thirdPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ thirdInfo }}" target="_blank">{{ thirdInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle4"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="fourthImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle4">{{ fourthCreator }}, (b. {{ fourthBirth }}) <br />{{ fourthTitle }}, {{ fourthDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ fourthTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ fourthCity }}</strong>
+        <br />
+        At the <strong>{{ fourthPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ fourthInfo }}" target="_blank">{{ fourthInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle5"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="fifthImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle5">{{ fifthCreator }}, (b. {{ fifthBirth }}) <br />{{ fifthTitle }}, {{ fifthDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ fifthTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ fifthCity }}</strong>
+        <br />
+        At the <strong>{{ fifthPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ fifthInfo }}" target="_blank">{{ fifthInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle6"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="sixImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle6">{{ sixCreator }}, (b. {{ sixBirth }})<br />{{ sixTitle }}, {{ sixDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ sixTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ sixCity }}</strong>
+        <br />
+        At the <strong>{{ sixPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ sixInfo }}" target="_blank">{{ sixInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter7" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle7"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="sevenImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle7">{{ sevenCreator }}, (b. {{ sevenBirth }})<br />{{ sevenTitle }}, {{ sevenDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ sevenTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ sevenCity }}</strong>
+        <br />
+        At the <strong>{{ sevenPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ sevenInfo }}" target="_blank">{{ sevenInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter8" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle8"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="eightImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle8">{{ eightCreator }}, (b. {{ eightBirth }})<br />{{ eightTitle }}, {{ eightDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ eightTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ eightCity }}</strong>
+        <br />
+        At the <strong>{{ eightPlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ eightInfo }}" target="_blank">{{ eightInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal " id="exampleModalCenter9" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle9"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img [src]="nineImage">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle9">{{ nineCreator }}, (b. {{ nineBirth }})<br />{{ nineTitle }}, {{ nineDate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <strong>Visit the {{ nineTitle }}!</strong> <br />
+          <i class="fas fa-map-marker-alt"></i><strong>{{ nineCity }}</strong>
+        <br />
+        At the <strong>{{ ninePlace }}</strong> Museum
+        <br />
+        Additional Info: <a href="{{ nineInfo }}" target="_blank">{{ nineInfo }}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+    

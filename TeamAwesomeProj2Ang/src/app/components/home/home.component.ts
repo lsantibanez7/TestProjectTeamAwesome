@@ -10,8 +10,10 @@ import {RegistrationService} from 'src/app/services/registration.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //userModelNew = new UserLogged('','','');
+ // userModelNew = new UserLogged('','','');
+  
   public userModelNew: any = {};
+
   constructor(private registrationService : RegistrationService) { }
   onSubmit() {
     this.registrationService.send( this.userModelNew.username, this.userModelNew.email, this.userModelNew.password)
