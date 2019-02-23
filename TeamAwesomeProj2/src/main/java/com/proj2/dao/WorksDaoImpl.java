@@ -27,13 +27,13 @@ public class WorksDaoImpl implements WorksDao{
 	}
 	
 	@Override
-	public boolean saveWorks(String username, String api_id, String comment) {
+	public boolean saveWorksB(String api_id, String comment, int userId) {
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			
 			CallableStatement cs = conn.prepareCall("{?=call ta_insert_works(?,?,?)"); 
-			cs.setString(2, username);
-			cs.setString(3, api_id);
-			cs.setString(4, comment);
+			cs.setString(2, api_id);
+			cs.setString(3, comment);
+			cs.setInt(4, userId);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.executeUpdate();
 			return true;
@@ -41,6 +41,29 @@ public class WorksDaoImpl implements WorksDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false; 
+		}
+	}
+	
+	@Override
+	public Works saveWorks(String api_id, String comment, int userId) {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall("{?=call ta_insert_works(?,?,?)"); 
+			cs.setString(2, api_id);
+			cs.setString(3, comment);
+			cs.setInt(4, userId);
+			cs.registerOutParameter(1, Types.NUMERIC);
+			cs.executeUpdate();
+			return new Works(
+					cs.getInt(1), 
+					api_id, 
+					comment, 
+					userId 
+					);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null; 
 		}
 	}
 
@@ -55,7 +78,7 @@ public class WorksDaoImpl implements WorksDao{
 			while(results.next()) {
 				return new Works(
 						results.getInt("ta_works_id"),
-						results.getInt("ta_works_api_id"),
+						results.getString("ta_works_api_id"),
 						results.getString("ta_works_comment"),
 						results.getInt("ta_works_user_id")
 						);
@@ -79,7 +102,7 @@ public class WorksDaoImpl implements WorksDao{
 			while(results.next()) {
 				allWorks.add(new Works(
 						results.getInt("ta_works_id"),
-						results.getInt("ta_works_api_id"),
+						results.getString("ta_works_api_id"),
 						results.getString("ta_works_comment"),
 						results.getInt("ta_works_user_id"))
 						); 
@@ -113,7 +136,7 @@ public class WorksDaoImpl implements WorksDao{
 			while(results.next()) {
 				allWorks.add(new Works(
 						results.getInt("ta_works_id"),
-						results.getInt("ta_works_api_id"),
+						results.getString("ta_works_api_id"),
 						results.getString("ta_works_comment"),
 						results.getInt("ta_works_user_id"))
 						); 
@@ -140,7 +163,7 @@ public class WorksDaoImpl implements WorksDao{
 			while(results.next()) {
 				allWorks.add(new Works(
 						results.getInt("ta_works_id"),
-						results.getInt("ta_works_api_id"),
+						results.getString("ta_works_api_id"),
 						results.getString("ta_works_comment"),
 						results.getInt("ta_works_user_id"))
 						); 

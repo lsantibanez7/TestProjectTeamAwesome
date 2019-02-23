@@ -8,7 +8,8 @@ import com.proj2.model.Works;
 public interface WorksDao {
 
 	// CREATE methods
-	public boolean saveWorks(String username, String apiId, String comment); // 100% untested
+	public boolean saveWorksB(String apiId, String comment, int userId); // 100% untested
+	public Works saveWorks(String apiId, String comment, int userId); // 100% untested
 	
 	// READ methods
 	public Works getWorks(int id); // 100% untested
