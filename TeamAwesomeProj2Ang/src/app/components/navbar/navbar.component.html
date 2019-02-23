@@ -26,12 +26,34 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink= 'viewall'>View All Art<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink= "viewartist">Artist</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" role="button" id="dropdownArtist" style="color: white" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">Artist</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownArtist" (change)="selectChangeHandler($event)">
+                <a class="dropdown-item" routerLink="viewartist" value="Any">Any</a>
+                <a class="dropdown-item" routerLink="viewartist" value="Gustave Moreau">Gustave Moreau</a>
+                <a class="dropdown-item" routerLink="viewartist" value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</a>
+                <a class="dropdown-item" routerLink="viewartist" value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</a>
+                <a class="dropdown-item" routerLink="viewartist" value="Roland Bonaparte">Roland Bonaparte</a>
+                <a class="dropdown-item" routerLink="viewartist" value="Léonard de Vinci">Léonard de Vinci</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink= 'viewmuseum'>Museum</a>
-      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" id="dropdownPlace" style="color: white" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Museum</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownPlace" (change)="selectChangeHandler2($event)">
+            <form #loginForm="ngForm" (ngSubmit)="onPlace()">
+              <div class="form-group">
+                  <a class="dropdown-item" value="Any">Any</a>
+                  <a class="dropdown-item" value="Musée du Louvre">Musée du Louvre</a>
+                  <a class="dropdown-item" value="Paris, musée du quai Branly">Paris, musée du quai Branly</a>
+                  <a class="dropdown-item" value="musée d'Orsay">musée d'Orsay</a>
+                  <a class="dropdown-item" value="Versailles, châteaux de Versailles et de Trianon">Versailles</a>
+                  <a class="dropdown-item" value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</a>
+                  </div>
+                  </form>
+          </div>
+        </li>
       <li class=" nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Login

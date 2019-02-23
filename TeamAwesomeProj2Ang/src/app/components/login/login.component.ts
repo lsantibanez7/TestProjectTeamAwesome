@@ -16,14 +16,14 @@ import { User } from 'src/app/user';
 
 export class LoginComponent implements OnInit {
 
-  //userModel = new User('','');
-
   public User : any = {};
 
   constructor(private loginService: LoginService) {}
+
   onSubmit() {
-    console.log(this.User);
-    this.loginService.send(this.User.username, this.User.password)  }
+    this.loginService.send( this.User.username, this.User.password);
+  }
+
  ngOnInit() {
   }
 

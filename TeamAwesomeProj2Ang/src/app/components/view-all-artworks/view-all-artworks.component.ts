@@ -92,6 +92,24 @@ export class ViewAllArtworksComponent implements OnInit {
 
   }
 
+  firstPage() : any {
+    this.Photos = this.configService.pageOne(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
+  secondPage() : any {
+    this.Photos = this.configService.pageTwo(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
+  thirdPage() : any {
+    this.Photos = this.configService.pageThree(this.selectedArtist, this.selectedPlace);
+
+    this.loadInfo();
+  }
+
   prevPage() : any {
 
     this.Photos = this.configService.downPage(this.selectedArtist, this.selectedPlace);

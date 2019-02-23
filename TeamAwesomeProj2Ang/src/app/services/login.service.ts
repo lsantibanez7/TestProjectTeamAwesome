@@ -18,10 +18,18 @@ export class LoginService {
   //will help us go from the java side to Angular
   //({items being passed}, {responseType: "json"})
   
-  constructor(private _http: HttpClient) { }
+  constructor( private _http: HttpClient) { }
   send(username: string, password: string){
-  console.log({username: username, password:password});
-   let obs= this._http.post<any>(this.url,{username: username, password:password}).subscribe(data => {console.log(data)});
+   let obs= this._http.post<any>(this.url,{username : username, password : password })
+  .subscribe(data => {
+    console.log(data)
+    if(data == null){
+      console.log("null object");
+    }else{
+      console.log("real object");
+    }
+  });
+
    return obs;
   }
 }
