@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from "src/app/services/config.service";
 import { Observable } from 'rxjs';
+import { FavoriteService } from "src/app/services/favorite.service";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public zeroPlace: string;
   public zeroCity: string;
   public zeroInfo: string;
-  public zeroID: number;
+  public zeroID: string;
   public zeroDate: string;
   public zeroBirth: string;
 
@@ -45,7 +46,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public firstPlace: string;
   public firstCity: string;
   public firstInfo: string;
-  public firstID: number;
+  public firstID: string;
   public firstDate: string;
   public firstBirth: string;
 
@@ -55,7 +56,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public secondPlace: string;
   public secondCity: string;
   public secondInfo: string;
-  public secondID: number;
+  public secondID: string;
   public secondDate: string;
   public secondBirth: string;
 
@@ -65,7 +66,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public thirdPlace: string;
   public thirdCity: string;
   public thirdInfo: string;
-  public thirdID: number;
+  public thirdID: string;
   public thirdDate: string;
   public thirdBirth: string;
 
@@ -75,7 +76,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public fourthPlace: string;
   public fourthCity: string;
   public fourthInfo: string;
-  public fourthID: number;
+  public fourthID: string;
   public fourthDate: string;
   public fourthBirth: string;
 
@@ -85,7 +86,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public fifthPlace: string;
   public fifthCity: string;
   public fifthInfo: string;
-  public fifthID: number;
+  public fifthID: string;
   public fifthDate: string;
   public fifthBirth: string;
 
@@ -95,7 +96,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public sixPlace: string;
   public sixCity: string;
   public sixInfo: string;
-  public sixID: number;
+  public sixID: string;
   public sixDate: string;
   public sixBirth: string;
 
@@ -105,7 +106,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public sevenPlace: string;
   public sevenCity: string;
   public sevenInfo: string
-  public sevenID: number;
+  public sevenID: string;
   public sevenDate: string;
   public sevenBirth: string;
 
@@ -115,7 +116,7 @@ export class ViewAllArtworksComponent implements OnInit {
   public eightPlace: string;
   public eightCity: string;
   public eightInfo: string;
-  public eightID: number;
+  public eightID: string;
   public eightDate: string;
   public eightBirth: string;
 
@@ -131,7 +132,7 @@ export class ViewAllArtworksComponent implements OnInit {
 
   private Photos: Observable<any>;
 
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService, private favoriteService : FavoriteService) { }
 
   ngOnInit() {
     //This is the call to the API, bringing back
@@ -144,6 +145,51 @@ export class ViewAllArtworksComponent implements OnInit {
   toggle(): void {
     this.isHidden = !this.isHidden;
   }
+
+  onFav() {
+    console.log("hey I'm an ID", this.zeroID);
+    localStorage.setItem("photoID", this.zeroID);
+    console.log(localStorage);
+    this.favoriteService.send(localStorage.getItem("photoID"));
+  }
+
+  onFav1() {
+    this.favoriteService.send(this.firstID);
+  }
+
+  onFav2(){
+    this.favoriteService.send(this.secondID);
+  }
+
+  onFav3(){
+    this.favoriteService.send(this.thirdID);
+  }
+
+  onFav4(){
+    this.favoriteService.send(this.fourthID);
+  }
+
+  onFav5(){
+    this.favoriteService.send(this.fifthID);
+  }
+
+  onFav6() {
+    this.favoriteService.send(this.sixID);
+  }
+
+  onFav7() {
+    this.favoriteService.send(this.sevenID);
+  }
+
+  onFav8(){
+    this.favoriteService.send(this.eightID);
+  }
+
+  onFav9(){
+    this.favoriteService.send(this.nineID);
+  }
+
+
 
   nextPage(): any {
     //This is the call to the API, bringing back

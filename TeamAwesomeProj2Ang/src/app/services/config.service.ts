@@ -16,6 +16,8 @@ export class ConfigService {
 
   private junkL: string = "&facets%5Blocations%5D=";
 
+  private question: string = "?"
+  
   private httpOptions = {
     headers: new HttpHeaders({
       'ApiKey': '37dd07f19435cb72c14e0347ae4cc556e351d9503f0d39025011da7525fa83bb'
@@ -25,6 +27,11 @@ export class ConfigService {
   private configUrl = 'https://api.art.rmngp.fr/v1/works?';
 
   constructor(private http: HttpClient) { }
+
+  getImage(value) {
+    let obs = this.http.get(this.configUrl + value, this.httpOptions);
+    return obs;
+  }
 
   getConfig(){
     console.log("API call for all works");

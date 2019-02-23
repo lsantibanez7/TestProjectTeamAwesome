@@ -3,12 +3,12 @@ package com.proj2.model;
 public class Works {
 
 	private int id;
-	private int apiId;
+	private String apiId;
 	private String comment;
 	private int userId;
 	
 	
-	public Works(int id, int apiId, String comment, int userId) {
+	public Works(int id, String apiId, String comment, int userId) {
 		this.id = id;
 		this.apiId = apiId;
 		this.comment = comment;
@@ -26,12 +26,12 @@ public class Works {
 	}
 
 
-	public int getApiId() {
+	public String getApiId() {
 		return apiId;
 	}
 
 
-	public void setApiId(int apiId) {
+	public void setApiId(String apiId) {
 		this.apiId = apiId;
 	}
 
@@ -60,9 +60,9 @@ public class Works {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((apiId == null) ? 0 : apiId.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + apiId;
 		result = prime * result + userId;
 		return result;
 	}
@@ -77,6 +77,11 @@ public class Works {
 		if (getClass() != obj.getClass())
 			return false;
 		Works other = (Works) obj;
+		if (apiId == null) {
+			if (other.apiId != null)
+				return false;
+		} else if (!apiId.equals(other.apiId))
+			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
@@ -84,8 +89,6 @@ public class Works {
 			return false;
 		if (id != other.id)
 			return false;
-		if (apiId != other.apiId)
-			return false; 
 		if (userId != other.userId)
 			return false;
 		return true;
@@ -94,7 +97,7 @@ public class Works {
 
 	@Override
 	public String toString() {
-		return "Works [id=" + id + ", url=" + apiId + ", comment=" + comment + ", userId=" + userId + "]";
+		return "Works [id=" + id + ", apiId=" + apiId + ", comment=" + comment + ", userId=" + userId + "]";
 	}
 	
 }

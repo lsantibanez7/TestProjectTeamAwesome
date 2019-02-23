@@ -103,8 +103,8 @@ public class UserServiceImpl implements UserService{
 		String obj = (String)request.getSession().getAttribute("username");
 		
 		try {
-			User view = UserDaoImpl.getInstance().getUser(obj);
-			return WorksDaoImpl.getWoDa().getWorks(view.getId());
+			//User view = UserDaoImpl.getInstance().getUser(obj);
+			return WorksDaoImpl.getWoDa().getWorksUserByUsername(obj);
 		} catch (UserNotFoundException e) {
 
 			e.printStackTrace();
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
 		String obj = (String)request.getSession().getAttribute("username");
-		int api_id = 0;
+		String api_id = "";
 		String comment = "";
 		
 		try {

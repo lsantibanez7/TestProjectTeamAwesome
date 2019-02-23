@@ -2,16 +2,18 @@ package com.proj2.dao;
 
 import java.util.List;
 
+import com.proj2.exception.UserNotFoundException;
 import com.proj2.model.Works;
 
 public interface WorksDao {
 
 	// CREATE methods
-	public boolean saveWorks(String username, int api_id, String comment); 
+	public boolean saveWorks(String username, String api_id, String comment); 
 	
 	// READ methods
 	public Works getWorks(int id);
 	public List<Works> getWorksAll(); 
+	public List<Works> getWorksUserByUsername(String username) throws UserNotFoundException;
 	
 	// UPDATE methods
 	public boolean updateComment(String comment); 
