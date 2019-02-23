@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logged-navbar',
@@ -8,15 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class LoggedNavbarComponent implements OnInit {
 
 
-  public userModel : any = {};
+  constructor(private _router: Router) { }
 
-  constructor() { }
+  onLogout() {
+    console.log(localStorage);
+    localStorage.clear();
 
-  ngOnInit() {
+    this._router.navigate(["/home"]);
+
+    console.log("loggedout",localStorage);
   }
 
-  onSubmit() {
-    
+  ngOnInit() {
   }
 
 }

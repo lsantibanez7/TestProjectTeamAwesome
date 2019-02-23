@@ -16,11 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private registrationService : RegistrationService) { }
   onSubmit() {
-    this.registrationService.send( this.userModelNew.username, this.userModelNew.email, this.userModelNew.password)
-      .subscribe(
-        data => console.log('Success',data)
-   
-      )
+    this.registrationService.send( this.userModelNew.username, this.userModelNew.email, this.userModelNew.password);
   }
 
   ngOnInit() {

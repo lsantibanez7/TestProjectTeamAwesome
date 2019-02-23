@@ -13,6 +13,7 @@ export class LoginService {
  
 
   url = 'http://52.15.180.249:8080/proj2/proj2/login';
+  //url = 'http://localhost:8080/TeamAwesomeProj2/proj2/login';
 
 
   
@@ -24,6 +25,7 @@ export class LoginService {
     if(data == null){
       console.error("null object");
     }else{
+      //MADE BY MARIA
       console.log(data)
       //store active user
       localStorage.setItem("currentUser", JSON.stringify(data));
