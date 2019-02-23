@@ -25,4 +25,6 @@ public interface UserService {
 	Object updatePrivilegesToUser(HttpServletRequest request, HttpServletResponse response);
 	Object updatePrivilegesToAdmin(HttpServletRequest request, HttpServletResponse response);
 	Object deleteUser(HttpServletRequest request, HttpServletResponse response);
+	
+	Object homeRedirect(HttpServletRequest request, HttpServletResponse response); 
 }

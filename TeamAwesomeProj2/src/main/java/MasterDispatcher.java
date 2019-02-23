@@ -42,7 +42,8 @@ private MasterDispatcher() {}
 			return userservice.updatePrivilegesToAdmin(request, response);
 		}else if(request.getRequestURI().contains("DeleteUser")) {
 			return userservice.deleteUser(request, response);
-		}
+		}else if(request.getRequestURI().contains("home"))
+			return userservice.homeRedirect(request, response); 
 		else {
 			return "Not yet Implented";
 		}
