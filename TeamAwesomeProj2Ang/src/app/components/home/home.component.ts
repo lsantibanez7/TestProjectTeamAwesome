@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogged } from 'src/app/user-logged';
 import {RegistrationService} from 'src/app/services/registration.service';
+import { Router } from '@angular/router';
 
 
 
@@ -14,9 +15,13 @@ export class HomeComponent implements OnInit {
   
   public userModelNew: any = {};
 
-  constructor(private registrationService : RegistrationService) { }
+  constructor(private _router: Router,private registrationService : RegistrationService) { }
   onSubmit() {
     this.registrationService.send( this.userModelNew.username, this.userModelNew.email, this.userModelNew.password);
+  }
+
+  onRegistration(){
+    this._router.navigate(["/tempuserhome"]);
   }
 
   ngOnInit() {

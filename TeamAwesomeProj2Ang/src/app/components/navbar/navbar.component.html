@@ -17,72 +17,79 @@
 
 
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#" routerLink='home' id="logotemp">Logo</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink= 'viewall'>View All Art<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" role="button" id="dropdownArtist" style="color: white" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">Artist</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownArtist" (change)="selectChangeHandler($event)">
-                <a class="dropdown-item" routerLink="viewartist" value="Any">Any</a>
-                <a class="dropdown-item" routerLink="viewartist" value="Gustave Moreau">Gustave Moreau</a>
-                <a class="dropdown-item" routerLink="viewartist" value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</a>
-                <a class="dropdown-item" routerLink="viewartist" value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</a>
-                <a class="dropdown-item" routerLink="viewartist" value="Roland Bonaparte">Roland Bonaparte</a>
-                <a class="dropdown-item" routerLink="viewartist" value="Léonard de Vinci">Léonard de Vinci</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" id="dropdownPlace" style="color: white" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Museum</a>
-          <div class="dropdown-menu" aria-labelledby="dropdownPlace" (change)="selectChangeHandler2($event)">
-            <form #loginForm="ngForm" (ngSubmit)="onPlace()">
-              <div class="form-group">
-                  <a class="dropdown-item" value="Any">Any</a>
-                  <a class="dropdown-item" value="Musée du Louvre">Musée du Louvre</a>
-                  <a class="dropdown-item" value="Paris, musée du quai Branly">Paris, musée du quai Branly</a>
-                  <a class="dropdown-item" value="musée d'Orsay">musée d'Orsay</a>
-                  <a class="dropdown-item" value="Versailles, châteaux de Versailles et de Trianon">Versailles</a>
-                  <a class="dropdown-item" value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</a>
-                  </div>
-                  </form>
-          </div>
-          
+    <a class="navbar-brand" href="#" routerLink='home' id="logotemp">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink= 'viewall'>View All Art<span class="sr-only">(current)</span></a>
         </li>
-      <li class=" nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Login
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdownform">
-            <form #loginForm="ngForm"(ngSubmit)="onSubmit()" novalidate id="login-form"> 
-              <!-- {{loginForm.value | json}} 
-              <hr />
-              {{userModel | json}}
-              <hr />
-              {{email.pristine}} -->
-            
-                
-                <div class="form-group" >
-                  <label>Username</label>
-                  <input type="text" required #username="ngModel" [class.is-invalid]="username.invalid" class="form-control" name ="username" [(ngModel)]="User.username">
-              </div>     
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" required #password="ngModel" [class.is-invalid]="password.invalid" class="form-control" name="password" [(ngModel)]="User.password">
-              </div>
-              <div>
-              <button type="submit" class="btn btn-primary" >Log In</button>
-              </div> 
-            </form>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink= 'tempuserhome'>User Home<span class="sr-only">(current)</span></a>
+        </li>
+        <!-- camerons artist artist -->
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle customLink" role="button" id="dropdownArtist" style="color: white" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Artist</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownArtist" (change)="selectChangeHandler($event)">
+                  <a class="dropdown-item" routerLink="viewartist" value="Any">Any</a>
+                  <a class="dropdown-item" routerLink="viewartist" value="Gustave Moreau">Gustave Moreau</a>
+                  <a class="dropdown-item" routerLink="viewartist" value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</a>
+                  <a class="dropdown-item" routerLink="viewartist" value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</a>
+                  <a class="dropdown-item" routerLink="viewartist" value="Roland Bonaparte">Roland Bonaparte</a>
+                  <a class="dropdown-item" routerLink="viewartist" value="Léonard de Vinci">Léonard de Vinci</a>
           </div>
-
-      </li>
-    </ul>
-  </div>
-</nav>
+        </li> -->
+        <!-- camerons museum dropdown -->
+        <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" id="dropdownPlace" style="color: white" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Museum</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownPlace" (change)="selectChangeHandler2($event)">
+              <form #loginForm="ngForm" (ngSubmit)="onPlace()">
+                <div class="form-group">
+                    <a class="dropdown-item" value="Any">Any</a>
+                    <a class="dropdown-item" value="Musée du Louvre">Musée du Louvre</a>
+                    <a class="dropdown-item" value="Paris, musée du quai Branly">Paris, musée du quai Branly</a>
+                    <a class="dropdown-item" value="musée d'Orsay">musée d'Orsay</a>
+                    <a class="dropdown-item" value="Versailles, châteaux de Versailles et de Trianon">Versailles</a>
+                    <a class="dropdown-item" value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</a>
+                    </div>
+                    </form>
+            </div>
+          </li> -->
+        <li class=" nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+          </a>
+          <!-- begin login form -->
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdownform">
+              <form #loginForm="ngForm"(ngSubmit)="onSubmit()" novalidate id="login-form"> 
+                <!-- {{loginForm.value | json}} 
+                <hr />
+                {{userModel | json}}
+                <hr />
+                {{email.pristine}} -->
+              
+                  
+                  <div class="form-group" >
+                    <label>Username</label>
+                    <input type="text" required #username="ngModel" [class.is-invalid]="username.invalid" class="form-control" name ="username" [(ngModel)]="User.username">
+                </div>     
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" required #password="ngModel" [class.is-invalid]="password.invalid" class="form-control" name="password" [(ngModel)]="User.password">
+                </div>
+                <div>
+                <button type="submit" class="btn btn-primary" >Log In</button>
+                </div> 
+              </form>
+            </div>
+  
+            <!-- end login form -->
+  
+        </li>
+      </ul>
+    </div>
+  </nav>

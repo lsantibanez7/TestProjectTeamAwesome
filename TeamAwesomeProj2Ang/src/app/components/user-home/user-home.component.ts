@@ -9,6 +9,9 @@ export class UserHomeComponent implements OnInit {
 
   constructor() { }
 
+  //userName = "Not Maria";
+  userName = JSON.parse(localStorage.getItem("currentUser")).username;
+
   ngOnInit() {
   }
 
