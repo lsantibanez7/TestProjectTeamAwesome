@@ -9,12 +9,12 @@ import { RegistrationService } from 'src/app/services/registration.service';
 })
 export class RegistrationComponent implements OnInit {
 
- // userModelNew = new UserLogged('','','');
-  public userModelNew : any = {};
+ // user = new UserLogged('','','');
+  public userLoggedModel : any = {};
 
   constructor(private registrationService : RegistrationService) { }
   onSubmit() {
-    this.registrationService.send( this.userModelNew.username, this.userModelNew.email, this.userModelNew.password)
+    this.registrationService.send( this.userLoggedModel.username, this.userLoggedModel.email, this.userLoggedModel.password)
       .subscribe(
         data => console.log('Success',data)
    
