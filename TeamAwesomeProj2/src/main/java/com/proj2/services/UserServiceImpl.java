@@ -267,18 +267,5 @@ public class UserServiceImpl implements UserService{
 		return false;
 	}
 
-	@Override
-	public Object homeRedirect(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		try {
-			response.sendRedirect("/");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
 		
 }
