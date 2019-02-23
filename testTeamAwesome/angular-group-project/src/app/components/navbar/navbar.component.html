@@ -26,8 +26,11 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink= 'viewall'>View All Art<span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink= 'tempuserhome'>User Home<span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" role="button" id="dropdownArtist" style="color: white" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle customLink" role="button" id="dropdownArtist" style="color: white" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">Artist</a>
         <div class="dropdown-menu" aria-labelledby="dropdownArtist" (change)="selectChangeHandler($event)">
                 <a class="dropdown-item" routerLink="viewartist" value="Any">Any</a>
@@ -58,6 +61,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Login
         </a>
+        <!-- begin login form -->
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdownform">
             <form #loginForm="ngForm"(ngSubmit)="onSubmit()" novalidate id="login-form"> 
               <!-- {{loginForm.value | json}} 
@@ -80,6 +84,8 @@
               </div> 
             </form>
           </div>
+
+          <!-- end login form -->
 
       </li>
     </ul>

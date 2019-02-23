@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service'
 import { User } from 'src/app/user';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-navbar',
@@ -37,6 +38,12 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    // $('.customLink').hover(function() {
+    //   $(this).toggleClass('animated bounce');
+    // })
   }
+
+
+
 
 }
