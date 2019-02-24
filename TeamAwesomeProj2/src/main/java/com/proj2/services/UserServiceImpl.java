@@ -114,14 +114,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
-<<<<<<< HEAD
-		String obj = (String)request.getSession().getAttribute("username");
-
-		Enumeration<String> names = request.getSession().getAttributeNames(); 
-
-=======
-
->>>>>>> c3f9daf36935f9476bf580589f157beccfdb2ce4
 		//String obj = (String)request.getSession().getAttribute("username");
 		String username = "";
 		String api_id = "";

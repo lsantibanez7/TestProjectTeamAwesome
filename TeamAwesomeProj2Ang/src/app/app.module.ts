@@ -17,6 +17,7 @@ import { from } from 'rxjs';
 import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -38,7 +39,8 @@ import { UserHomeComponent } from './components/user-home/user-home.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    GoogleChartsModule.forRoot()
 
 
 

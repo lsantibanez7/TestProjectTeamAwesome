@@ -130,6 +130,8 @@ export class ViewAllArtworksComponent implements OnInit {
   public nineDate: string;
   public nineBirth: string;
 
+  public api_id: string;
+
   private Photos: Observable<any>;
 
   constructor(private configService: ConfigService, private favoriteService : FavoriteService) { }
@@ -147,46 +149,45 @@ export class ViewAllArtworksComponent implements OnInit {
   }
 
   onFav() {
-    console.log("hey I'm an ID", this.zeroID);
-    localStorage.setItem("photoID", this.zeroID);
-    console.log(localStorage);
-    this.favoriteService.send(localStorage.getItem("photoID"));
+    this.api_id = this.zeroID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "");
   }
 
   onFav1() {
-    this.favoriteService.send(this.firstID);
+  //  this.favoriteService.send(this.firstID);
   }
 
   onFav2(){
-    this.favoriteService.send(this.secondID);
+  //  this.favoriteService.send(this.secondID);
   }
 
   onFav3(){
-    this.favoriteService.send(this.thirdID);
+  //  this.favoriteService.send(this.thirdID);
   }
 
   onFav4(){
-    this.favoriteService.send(this.fourthID);
+  //  this.favoriteService.send(this.fourthID);
   }
 
   onFav5(){
-    this.favoriteService.send(this.fifthID);
+  //  this.favoriteService.send(this.fifthID);
   }
 
   onFav6() {
-    this.favoriteService.send(this.sixID);
+   // this.favoriteService.send(this.sixID);
   }
 
   onFav7() {
-    this.favoriteService.send(this.sevenID);
+  //  this.favoriteService.send(this.sevenID);
   }
 
   onFav8(){
-    this.favoriteService.send(this.eightID);
+   // this.favoriteService.send(this.eightID);
   }
 
   onFav9(){
-    this.favoriteService.send(this.nineID);
+  //  this.favoriteService.send(this.nineID);
   }
 
 
