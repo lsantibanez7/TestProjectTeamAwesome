@@ -1,32 +1,35 @@
 package com.proj2.util;
 
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.proj2.dao.UserDaoImpl;
 import com.proj2.dao.WorksDaoImpl;
-import com.proj2.exception.InvalidEmailException;
-import com.proj2.exception.InvalidPasswordException;
-import com.proj2.exception.InvalidUsernameException;
-import com.proj2.exception.UserNotFoundException;
-import com.proj2.model.User;
-import com.proj2.model.Works;
 
 public class Debug {
 	
 	
 	
 	public static void main(String[] args) {
+ 
+		int i = UserDaoImpl.getInstance().getUserCount(); 
+		System.out.println(i + " users total");
+
+		Map<Integer, Integer> userCountData = WorksDaoImpl.getWoDa().getCountOfWorksSavedByEachUser();		
+		for(Integer key : userCountData.keySet()) {
+			System.out.println("User id: " + key + " saved " + userCountData.get(key) + " images.");
+		}
 		
-		try {
-			UserDaoImpl.getInstance().deleteUser("test4"); 
-			User u = UserDaoImpl.getInstance().insertUser("test4", "pass4", "test4@test.edu"); 
-			Works w = WorksDaoImpl.getWoDa().saveWorks("100110", "no comment", u.getId()); 
-			
-		} catch (InvalidUsernameException | InvalidPasswordException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
+		Map<String, Integer> userCountDataU = WorksDaoImpl.getWoDa().getCountOfWorksSavedByEachUserReturnsUsername();		
+		for(String key : userCountDataU.keySet()) {
+			System.out.println("User id: " + key + " saved " + userCountDataU.get(key) + " images.");
+		}
+		
+		Map<Integer, Integer> worksCountData = WorksDaoImpl.getWoDa().getCountOfUsersWhoSavedWorks();		
+		for(Integer key : worksCountData.keySet()) {
+			System.out.println("Works id: " + key + " was saved by " + worksCountData.get(key) + " users.");
+		}
 
 		
 		

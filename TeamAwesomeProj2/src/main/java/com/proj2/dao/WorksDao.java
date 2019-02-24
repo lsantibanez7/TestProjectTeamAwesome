@@ -1,8 +1,10 @@
 package com.proj2.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proj2.exception.UserNotFoundException;
+import com.proj2.model.User;
 import com.proj2.model.Works;
 
 public interface WorksDao {
@@ -22,5 +24,12 @@ public interface WorksDao {
 	
 	// DELETE methods
 	public boolean deleteWorks(int id); //100% untested
+	
+	// STATISTICS 
+	public int getWorksCount(); 
+	
+	public Map<Integer, Integer> getCountOfWorksSavedByEachUser(); 
+	public Map<String, Integer> getCountOfWorksSavedByEachUserReturnsUsername(); 
+	public Map<Integer, Integer> getCountOfUsersWhoSavedWorks(); 
 
 }

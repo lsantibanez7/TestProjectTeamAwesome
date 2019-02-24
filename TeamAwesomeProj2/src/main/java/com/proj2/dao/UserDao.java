@@ -54,5 +54,8 @@ public interface UserDao {
 	public boolean deleteUser(String username); // 100% tested
 	public boolean deleteUserByUsername(String username); // 100% tested
 	public boolean deleteUserById(int userId); // 0% untested
+	
+	// STATISTICS 
+	public int getUserCount(); 
 
 }

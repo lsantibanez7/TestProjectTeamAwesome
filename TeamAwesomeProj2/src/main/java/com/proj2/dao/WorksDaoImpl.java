@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.proj2.exception.UserNotFoundException;
-import com.proj2.model.Privileges;
-import com.proj2.model.User;
 import com.proj2.model.Works;
 import com.proj2.util.JDBSCConnectionUtil;
 
@@ -205,4 +205,71 @@ public class WorksDaoImpl implements WorksDao{
 		}
 		return false; 
 	}
+
+	@Override
+	public int getWorksCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Map<Integer, Integer> getCountOfWorksSavedByEachUser() {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "SELECT ta_user_id, COUNT(*) " +  
+				    "FROM ta_works JOIN ta_user ON ta_works_user_id = ta_user_id " + 
+				    "GROUP BY ta_user_id";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet results = stmt.executeQuery();
+			Map<Integer, Integer> worksCount = new HashMap<>();
+			while(results.next()) {
+				worksCount.put(results.getInt(1), results.getInt(2)); 
+			}
+			return worksCount;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null; 
+	}
+	
+	@Override
+	public Map<String, Integer> getCountOfWorksSavedByEachUserReturnsUsername() {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "SELECT ta_user_username, COUNT(*) " +  
+				    "FROM ta_works JOIN ta_user ON ta_works_user_id = ta_user_id " + 
+				    "GROUP BY ta_user_username";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet results = stmt.executeQuery();
+			Map<String, Integer> worksCount = new HashMap<>();
+			while(results.next()) {
+				worksCount.put(results.getString(1), results.getInt(2)); 
+			}
+			return worksCount;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null; 
+	}
+	
+	
+
+	@Override
+	public Map<Integer, Integer> getCountOfUsersWhoSavedWorks() {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "SELECT ta_works_api_id, COUNT(*) " + 
+				    "FROM ta_works JOIN ta_user ON ta_works_user_id = ta_user_id " +
+				    "GROUP BY ta_works_api_id "; 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet results = stmt.executeQuery();
+			Map<Integer, Integer> userCount = new HashMap<>();
+			while(results.next()) {
+				userCount.put(results.getInt(1), results.getInt(2)); 
+			}
+			return userCount;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 }

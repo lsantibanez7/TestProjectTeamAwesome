@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -491,6 +492,24 @@ public class UserDaoImpl implements UserDao {
 			log.info("DELETE USER: FAIL! Unable to remove user #" + id + " from database");	
 			}
 		return false;
+	}
+
+	@Override
+	public int getUserCount() {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "SELECT COUNT(*) FROM ta_user";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet results = ps.executeQuery();
+			while(results.next()) {
+				int userCount = results.getInt(1); 
+				return userCount;
+			}
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();	
+		}
+		return -1; // Return -1 for error
 	}
 
 }
