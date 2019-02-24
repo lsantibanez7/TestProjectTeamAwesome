@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService{
 			
 			api_id = work.getApiId();
 			comment = work.getComment();
-			username = user.getNewUsername();
+			username = user.getUsername();
 			view = UserDaoImpl.getInstance().getUser(username);
 		
 			} catch (IOException e) {
