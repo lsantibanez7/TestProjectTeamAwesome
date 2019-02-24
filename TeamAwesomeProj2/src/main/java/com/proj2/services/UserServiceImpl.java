@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proj2.dao.UserDaoImpl;
 import com.proj2.dao.WorksDaoImpl;
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService{
 		
 		boolean outcome;
 		try {
-			outcome = UserDaoImpl.getInstance().insertUserB(username, password, email);
+			outcome = UserDaoImpl.getInstance().insertUserReturnsBoolean(username, password, email);
 			if(outcome == true) {
 				User setUser;
 				try {
@@ -99,12 +101,24 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object viewSavedWork(HttpServletRequest request, HttpServletResponse response) {
-		String obj = (String)request.getSession().getAttribute("username");
+		String username = "";
+		
+		
 		try {
-			//User view = UserDaoImpl.getInstance().getUser(obj);
-			return WorksDaoImpl.getWoDa().getWorksUserByUsername(obj);
+			Works work = mapper.readValue(request.getReader(), Works.class);
+			username = work.getUsername();
+			return WorksDaoImpl.getWoDa().getWorksUserByUsername(username);
 		} catch (UserNotFoundException e) {
 
+			e.printStackTrace();
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -274,6 +288,18 @@ public class UserServiceImpl implements UserService{
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public Object popularImages(HttpServletRequest request, HttpServletResponse response) {
+		
+		return WorksDaoImpl.getWoDa().getCountOfUsersWhoSavedWorks();
+	}
+
+	@Override
+	public Object imagesSavedByUser(HttpServletRequest request, HttpServletResponse response) {
+		
+		return WorksDaoImpl.getWoDa().getCountOfWorksSavedByEachUserReturnsUsername();
 	}
 
 		

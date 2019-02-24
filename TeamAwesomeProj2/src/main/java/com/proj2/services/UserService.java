@@ -27,4 +27,7 @@ public interface UserService {
 	Object deleteUser(HttpServletRequest request, HttpServletResponse response);
 	
 	
+	Object popularImages(HttpServletRequest request, HttpServletResponse response);
+	Object imagesSavedByUser(HttpServletRequest request, HttpServletResponse response);
+	
 }
