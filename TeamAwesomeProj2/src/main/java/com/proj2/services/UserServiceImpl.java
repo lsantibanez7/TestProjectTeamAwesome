@@ -131,9 +131,11 @@ public class UserServiceImpl implements UserService{
 		
 		try {
 			Works work = mapper.readValue(request.getReader(), Works.class);
+			User user = mapper.readValue(request.getReader(), User.class);
 			
 			api_id = work.getApiId();
 			comment = work.getComment();
+			username = user.getNewUsername();
 			view = UserDaoImpl.getInstance().getUser(username);
 		
 			} catch (IOException e) {
