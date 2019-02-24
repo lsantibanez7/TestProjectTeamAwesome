@@ -2,8 +2,6 @@ package com.proj2.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -116,10 +114,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
+<<<<<<< HEAD
 		String obj = (String)request.getSession().getAttribute("username");
 
 		Enumeration<String> names = request.getSession().getAttributeNames(); 
 
+=======
+
+>>>>>>> c3f9daf36935f9476bf580589f157beccfdb2ce4
 		//String obj = (String)request.getSession().getAttribute("username");
 		String username = "";
 		String api_id = "";
@@ -139,7 +141,7 @@ public class UserServiceImpl implements UserService{
 			
 			api_id = work.getApiId();
 			comment = work.getComment();
-			username = user.getNewUsername();
+			username = user.getUsername();
 			view = UserDaoImpl.getInstance().getUser(username);
 		
 			} catch (IOException e) {
