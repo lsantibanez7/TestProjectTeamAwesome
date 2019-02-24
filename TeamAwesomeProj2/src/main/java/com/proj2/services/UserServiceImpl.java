@@ -2,6 +2,7 @@ package com.proj2.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -101,7 +102,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Object viewSavedWork(HttpServletRequest request, HttpServletResponse response) {
 		String obj = (String)request.getSession().getAttribute("username");
-		
 		try {
 			//User view = UserDaoImpl.getInstance().getUser(obj);
 			return WorksDaoImpl.getWoDa().getWorksUserByUsername(obj);
@@ -117,6 +117,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
 		String obj = (String)request.getSession().getAttribute("username");
+
+		Enumeration<String> names = request.getSession().getAttributeNames(); 
 		String api_id = "";
 		String comment = "";
 		
