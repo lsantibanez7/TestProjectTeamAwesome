@@ -11,8 +11,8 @@ export class FavoriteService {
 
   constructor(private _http: HttpClient) { }
 
-  send(username: string,api_id: string, comment: string){
-    let obs = this._http.post<any>(this.url, {username: username, api_id: api_id, comment: comment})
+  send(username: string,apiId: string, comment: string){
+    let obs = this._http.post<any>(this.url, {username: username, apiId: apiId, comment: comment})
     .subscribe(data => {
       console.log("Id:",data);
     

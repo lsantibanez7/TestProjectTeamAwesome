@@ -17,6 +17,10 @@ public class WorksDaoImpl implements WorksDao{
 
 	private static WorksDaoImpl getWo; 
 	
+	private WorksDaoImpl() {
+		super(); 
+	}
+	
 	public static WorksDaoImpl getWoDa() {
 		if(getWo == null) {
 			getWo = new WorksDaoImpl(); 

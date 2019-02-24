@@ -114,38 +114,33 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object saveArtwork(HttpServletRequest request, HttpServletResponse response) {
-		//String obj = (String)request.getSession().getAttribute("username");
+		
 		String username = "";
-		String api_id = "";
+		String apiId = "";
 		String comment = "";
 		
 		User view = null;
-//		try {
-//			view = UserDaoImpl.getInstance().getUser(obj);
-//		} catch (UserNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 		
 		try {
 			Works work = mapper.readValue(request.getReader(), Works.class);
-			User user = mapper.readValue(request.getReader(), User.class);
+			//User user = mapper.readValue(request.getReader(), User.class);
 			
-			api_id = work.getApiId();
+			apiId = work.getApiId();
 			comment = work.getComment();
-			username = user.getUsername();
+			username = work.getUsername();
 			view = UserDaoImpl.getInstance().getUser(username);
 		
 			} catch (IOException e) {
 			
 			e.printStackTrace();
+			
 		} catch (UserNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
 		
-		return WorksDaoImpl.getWoDa().saveWorks(api_id, comment, view.getId());
+		return WorksDaoImpl.getWoDa().saveWorks(apiId, comment, view.getId());
 	}
 
 	@Override

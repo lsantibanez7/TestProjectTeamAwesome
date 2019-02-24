@@ -6,8 +6,11 @@ public class Works {
 	private String apiId;
 	private String comment;
 	private int userId;
+	private String username;
 	
-	
+	public Works() {
+		super();
+	}
 	public Works(int id, String apiId, String comment, int userId) {
 		this.id = id;
 		this.apiId = apiId;
@@ -98,6 +101,12 @@ public class Works {
 	@Override
 	public String toString() {
 		return "Works [id=" + id + ", apiId=" + apiId + ", comment=" + comment + ", userId=" + userId + "]";
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }
