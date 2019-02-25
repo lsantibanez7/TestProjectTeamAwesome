@@ -159,8 +159,12 @@ public class WorksDaoImpl implements WorksDao{
 			
 			String sql = "SELECT * FROM ta_works WHERE ta_works_user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+<<<<<<< HEAD
 
 			ps.setInt(1,userId);
+=======
+			ps.setInt(1, userId);
+>>>>>>> 87a18486c2e24972f5a84074856153ff960c1025
 
 			ResultSet results = ps.executeQuery();
 			
