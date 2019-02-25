@@ -101,18 +101,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object viewSavedWork(HttpServletRequest request, HttpServletResponse response) {
-<<<<<<< HEAD
 		//String obj = (String)request.getSession().getAttribute("username");
 		String username = "";
 		
-		try {
-			//User view = UserDaoImpl.getInstance().getUser(obj);
-=======
-		String username = "";
-		
 		
 		try {
->>>>>>> c2aa7aa94f412351feb1f3f100165c098954763e
+
 			Works work = mapper.readValue(request.getReader(), Works.class);
 			username = work.getUsername();
 			return WorksDaoImpl.getWoDa().getWorksUserByUsername(username);

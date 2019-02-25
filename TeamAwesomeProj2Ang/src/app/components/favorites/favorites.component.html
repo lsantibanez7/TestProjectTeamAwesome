@@ -34,68 +34,6 @@
       <!-- <button class="btn btn-light" style="float: right" (click)="nextPage()"> >> </button> -->
       <!--</div>-->
     </div>
-
-    <div class="container" id="search-container">
-        <div class="row justify-content-md-left">
-          <div class="col-md-3">
-              <div class="card" id="search-card">
-                  <div class="card-body">
-                    <!-- search dropdowns and buttons-->    
-                      <article>
-                          <h6><span>Artists:</span></h6>
-                          <select (change)="selectChangeHandler($event)">
-                            <option value="Any">Any</option>
-                            <option value="Gustave Moreau">Gustave Moreau</option>
-                            <option value="André-Adolphe-Eugène Disdéri">Andre-Adolphe</option>
-                            <option value="Jean-Baptiste Carpeaux">Jean-Baptiste Carpeaux</option>
-                            <option value="Roland Bonaparte">Roland Bonaparte</option>
-                            <option value="Léonard de Vinci">Léonard de Vinci</option>
-                          </select>
-                        </article>
-                        <article>
-                          <h6><span>Museums: </span></h6>
-                          <select (change)="selectChangeHandler2($event)">
-                            <option value="Any">Any</option>
-                            <option value="Musée du Louvre">Musée du Louvre</option>
-                            <option value="Paris, musée du quai Branly - Jacques Chirac">Paris, musée du quai Branly</option>
-                            <option value="musée d'Orsay">musée d'Orsay</option>
-                            <option value="Versailles, châteaux de Versailles et de Trianon">Versailles</option>
-                            <option value="Paris, musée Gustave Moreau">Paris, musée Gustave Moreau</option>
-                          </select>
-                        </article>
-                        <button class="btn btn-primary" (click)="searchItems()">Search</button>
-                  </div>
-                </div>
-          </div>
-          <div class="col-md-6 offset-1 ml-auto" >
-              <div class="card" id="instructions-card">
-                <div class="card-body text-light">
-                <h5 class="card-title justify-center" id="cardtitle">
-                   How to Use  <img src="./assets/images/Color-Logo.png" alt=""id="view-all-logo">
-                 </h5>   
-                 
-                  <hr>
-                  <ul>
-                    <li>
-                      See More With The Next, Previous, Or Number Page Buttons
-                    </li>
-                    <li>
-                      You Can Search For Pieces Based On Artist Or Museum
-                    </li>
-                    <li>
-                      Click On An Image For More Details And Travel Booking
-                    </li>
-                    <li>
-                      Save Favorites And Sign In To View Personal Gallery
-                    </li>
-                  </ul>
-      
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-
       <!--Artwork by 10 at a time-->
       <div class="row">
         <div class="column">

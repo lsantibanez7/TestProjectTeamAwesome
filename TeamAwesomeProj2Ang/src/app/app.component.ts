@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TestService } from './test.service';
 import { HttpClient } from '@angular/common/http';
+import * as d3 from 'd3';
 
 
 

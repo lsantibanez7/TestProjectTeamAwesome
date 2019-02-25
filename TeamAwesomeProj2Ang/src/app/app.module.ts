@@ -18,6 +18,10 @@ import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ArtNavbarComponent } from './components/art-navbar/art-navbar.component';
+import { ExtraFeaturesComponent } from './components/extra-features/extra-features.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';;
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -33,7 +37,11 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ViewByMuseumComponent,
     LoggedNavbarComponent,
     RegistrationComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    ArtNavbarComponent,
+    ExtraFeaturesComponent,
+    FavoritesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -6,32 +6,41 @@
   <div class="row" id="behind-jumbotron">
       <div class="col-md-9">
               <div class="jumbotron mt-5" id="jumbotron-userhome">
-                <h1 class="display-4">Welcome to the User Home page, {{ userName }}</h1>
-                <p class="lead">This is the features you can do</p>
-                <hr class="my-4">
-                <p>This is a description of a few features</p>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationForm">
-                  Empty Button
-                </button>
-              </div>
-              </div>
-              
-              <div class="col-md-3">
-                <div class="card mt-5" id="next-to-jumbotron"></div>
-                <div class="card-body">
-                  <img id="img-cat" src="./assets/images/cat.jpg">
-                  <table>
-                    <tr>
-                      <td><button id="btn_red">MAKE RED</button>
-                      <td><button id="btn_green">MAKE GREEN</button>
-                      <td><button id="btn_blue">MAKE BLUE</button>
-                      <td><button id="btn_blurry">MAKE BLURRY</button>
-                    </tr>
-              
-                  </table>
-                  <canvas id="canvas-cat"></canvas>
-        </div>
+                  <h1 class="display-4">Welcome To Your <strong> DCA Personal Gallery</strong>, {{ userName }}</h1>
+                  <hr class="my-4">
+
+                  <h5>Special DCA Features!</h5>
+                  <ul>
+                      <li>Save Your Favorite Artworks
+                            <i class="fas fa-2x ml-3 fa-heart"></i>
+                        </li>
+                      <li>See Where Pieces Are Located And Book Travel Plans
+                           <i class="fas fa-2x ml-3  fa-map-marker-alt"></i>
+                        </li>
+                      <li>Extra Features!
+                            <i class="fas fa-2x ml-3  fa-star"></i>
+                      </li>
+                  </ul>
+                  <!-- extra features page routing -->
+                   <button type="button" class="btn btn-primary" routerLink="/extrafeatures"data-toggle="modal" data-target="#registrationForm">
+                      Click Here for Extra Features
+                  </button> 
+               </div>  
       </div>
+  <!--  -->
+    <div class="col-md-3">
+        <div class="card mt-5" id="next-to-jumbotron">
+            <div class="card-body">
+                    <div class="" id="user-blurb">"Art museums provide a tangible connection between the humanities and Americans’ lives. " Access history's greatest artworks and enjoy the museum experience from home!</div> 
+                    <div>“Indicators in the News.” Humanities Indicators, www.humanitiesindicators.org/"
+                        <i class="fas  ml-3 fa-palette"></i>
+                    </div>
+                   
+            </div>
+        </div>    
+    </div>
+    <!-- end blue row -->
   </div>
 </div>
 <!-- ***change this to be favorite artworks, involves db and favorites button -->
+<app-favorites></app-favorites>

@@ -20,7 +20,7 @@
 }
 img{
     width: 100%;
-    height: 100%;
+    height: 70%;
 }
 
 .jumbotron{
@@ -31,13 +31,16 @@ img{
 
 #next-to-jumbotron{
     background-color: #FCB97D;
-    height: 360px;
+    height: 550px;
     box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
-.jumbotron:hover{
-  
+#mona-lisa{
+    height: 55%;
+    width: 80%;
 }
+
 
 #jumbotron-bg{
     background-color: #54524F;
@@ -47,3 +50,11 @@ img{
     padding: 10px;
     box-shadow: 0 3px 20px 11px rgba(0,0,0,0.5);
 }
+
+#blurb{
+    font-size: 22px;
+    margin: auto;
+    text-align: center;
+    
+}
+

@@ -6,6 +6,8 @@ import { ViewByArtistComponent } from './components/view-by-artist/view-by-artis
 import { ViewByMuseumComponent } from './components/view-by-museum/view-by-museum.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
+import { ExtraFeaturesComponent } from './components/extra-features/extra-features.component';
+
 
 
 
@@ -16,7 +18,8 @@ const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'viewartist', component:ViewByArtistComponent},
   {path:'viewmuseum', component:ViewByMuseumComponent},
-  {path: 'tempuserhome', component: UserHomeComponent }
+  {path: 'tempuserhome', component: UserHomeComponent },
+  {path: 'extrafeatures', component: ExtraFeaturesComponent}
 ];
 
 @NgModule({

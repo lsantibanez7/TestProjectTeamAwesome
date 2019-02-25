@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { FavoriteService } from "src/app/services/favorite.service";
 
 
+
 @Component({
   selector: 'app-view-all-artworks',
   templateUrl: './view-all-artworks.component.html',
@@ -151,43 +152,60 @@ export class ViewAllArtworksComponent implements OnInit {
   onFav() {
     this.api_id = this.zeroID;
     console.log("hey I'm an ID", this.api_id);
-    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "");
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav1() {
-  //  this.favoriteService.send(this.firstID);
+    this.api_id = this.firstID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav2(){
-  //  this.favoriteService.send(this.secondID);
+    this.api_id = this.secondID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav3(){
-  //  this.favoriteService.send(this.thirdID);
+    this.api_id = this.thirdID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav4(){
-  //  this.favoriteService.send(this.fourthID);
+    this.api_id = this.fourthID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav5(){
-  //  this.favoriteService.send(this.fifthID);
+    this.api_id = this.fifthID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav6() {
-   // this.favoriteService.send(this.sixID);
+    this.api_id = this.sixID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "favorite");
   }
 
   onFav7() {
-  //  this.favoriteService.send(this.sevenID);
+    this.api_id = this.sevenID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "hey");
   }
 
   onFav8(){
-   // this.favoriteService.send(this.eightID);
+    this.api_id = this.eightID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "hey");
   }
 
-  onFav9(){
-  //  this.favoriteService.send(this.nineID);
+  onFav9(){ this.api_id = this.nineID;
+    console.log("hey I'm an ID", this.api_id);
+    this.favoriteService.send(JSON.parse(localStorage.getItem("currentUser")).username,this.api_id, "hey");
   }
 
 

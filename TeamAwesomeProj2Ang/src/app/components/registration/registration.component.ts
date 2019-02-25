@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private registrationService : RegistrationService) { }
   onSubmit() {
+    console.log(this.userLoggedModel);
     this.registrationService.send( this.userLoggedModel.username, this.userLoggedModel.email, this.userLoggedModel.password);
   }
 
