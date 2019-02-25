@@ -48,6 +48,10 @@ private MasterDispatcher() {}
 			return userservice.updatePrivilegesToAdmin(request, response);
 		}else if(request.getRequestURI().contains("DeleteUser")) {
 			return userservice.deleteUser(request, response);
+		}else if(request.getRequestURI().contains("Popularity")) {
+			return userservice.popularImages(request, response);
+		}else if(request.getRequestURI().contains("PupularityByUsername")) {
+			return userservice.imagesSavedByUser(request, response);
 		}
 		else {
 			return "Not yet Implented";

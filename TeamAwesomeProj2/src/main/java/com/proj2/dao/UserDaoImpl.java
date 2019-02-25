@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.proj2.exception.IncorrectPasswordException;
@@ -29,6 +30,7 @@ public class UserDaoImpl implements UserDao {
 	
 	private UserDaoImpl() {
 		super(); 
+		BasicConfigurator.configure();
 	}
 	
 	public static UserDaoImpl getInstance() {
@@ -492,10 +494,21 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean insertUserB(String username, String password, String email)
-			throws InvalidUsernameException, InvalidPasswordException {
-		// TODO Auto-generated method stub
-		return false;
+	public int getUserCount() {
+		try(Connection conn = JDBSCConnectionUtil.getConnection()){
+			String sql = "SELECT COUNT(*) FROM ta_user";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet results = ps.executeQuery();
+			while(results.next()) {
+				int userCount = results.getInt(1); 
+				return userCount;
+			}
+		} catch (SQLException e) {
+			e.getSQLState();
+			e.getErrorCode();
+			e.printStackTrace();	
+		}
+		return -1; // Return -1 for error
 	}
 
 }

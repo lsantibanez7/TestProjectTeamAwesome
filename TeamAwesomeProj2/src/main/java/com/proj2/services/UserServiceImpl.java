@@ -101,11 +101,18 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Object viewSavedWork(HttpServletRequest request, HttpServletResponse response) {
+<<<<<<< HEAD
 		//String obj = (String)request.getSession().getAttribute("username");
 		String username = "";
 		
 		try {
 			//User view = UserDaoImpl.getInstance().getUser(obj);
+=======
+		String username = "";
+		
+		
+		try {
+>>>>>>> c2aa7aa94f412351feb1f3f100165c098954763e
 			Works work = mapper.readValue(request.getReader(), Works.class);
 			username = work.getUsername();
 			return WorksDaoImpl.getWoDa().getWorksUserByUsername(username);
@@ -289,6 +296,18 @@ public class UserServiceImpl implements UserService{
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public Object popularImages(HttpServletRequest request, HttpServletResponse response) {
+		
+		return WorksDaoImpl.getWoDa().getCountOfUsersWhoSavedWorks();
+	}
+
+	@Override
+	public Object imagesSavedByUser(HttpServletRequest request, HttpServletResponse response) {
+		
+		return WorksDaoImpl.getWoDa().getCountOfWorksSavedByEachUserReturnsUsername();
 	}
 
 		
