@@ -125,6 +125,7 @@ public class WorksDaoImpl implements WorksDao{
 		try(Connection conn = JDBSCConnectionUtil.getConnection()){
 			String sqlUser = "SELECT ta_user_id FROM ta_user WHERE ta_user_username = ?"; 
 			PreparedStatement psUser = conn.prepareStatement(sqlUser); 
+			psUser.setString(1, username);
 			ResultSet resultsUser = psUser.executeQuery();
 			int userId = 0; 
 			while(resultsUser.next()) userId = resultsUser.getInt("ta_user_id"); 
@@ -132,6 +133,7 @@ public class WorksDaoImpl implements WorksDao{
 			
 			String sql = "SELECT * FROM ta_works WHERE ta_works_user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
 			ResultSet results = ps.executeQuery();
 			
 			List<Works> allWorks = new ArrayList<>();
@@ -159,6 +161,7 @@ public class WorksDaoImpl implements WorksDao{
 			
 			String sql = "SELECT * FROM ta_works WHERE ta_works_user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
 			ResultSet results = ps.executeQuery();
 			
 			List<Works> allWorks = new ArrayList<>();
