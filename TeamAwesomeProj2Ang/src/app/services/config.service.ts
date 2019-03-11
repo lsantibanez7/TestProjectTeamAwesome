@@ -23,7 +23,7 @@ export class ConfigService {
       'ApiKey': '37dd07f19435cb72c14e0347ae4cc556e351d9503f0d39025011da7525fa83bb'
     })
   };
-
+//
   private configUrl = 'https://api.art.rmngp.fr/v1/works?';
 
   constructor(private http: HttpClient) { }
