@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class RegistrationService {
-  url = 'http://52.15.180.249:8080/proj2/proj2/Register';
+  url = 'http://3.16.181.126:8080/proj2/proj2/Register';
   //url = 'http://localhost:8080/TeamAwesomeProj2/proj2/Register';
 
   constructor(private _router: Router, private _http: HttpClient) { }
@@ -26,4 +26,5 @@ export class RegistrationService {
     });
     return obs;
   }
+  //
 }
