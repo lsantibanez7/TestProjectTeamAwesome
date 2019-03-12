@@ -23,7 +23,7 @@ export class LoginService {
   .subscribe(data => {
     console.log(this.url);
     console.log("log stuff", username, password);
-    if(data == null){
+    if(username == null){
       console.error("null object");
     }else{
       //MADE BY MARIA
