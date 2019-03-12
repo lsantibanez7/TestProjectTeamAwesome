@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class GetFavoritesService {
 
   //url = 'http://localhost:8080/TeamAwesomeProj2/proj2/ViewSavedWork';
-  url = 'http://52.15.180.249:8080/proj2/proj2/ViewSavedWork';
+  url = 'http://3.16.181.126:8080/proj2/proj2/ViewSavedWork';
 
   private httpOptions = {
     headers: new HttpHeaders({
