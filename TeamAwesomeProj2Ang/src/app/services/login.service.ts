@@ -30,7 +30,6 @@ export class LoginService {
       console.log(data)
       //store active user
       localStorage.setItem("currentUser", username);
-      localStorage.setItem("currentUser", password);
       console.log("local", localStorage);
       //localStorage.setItem("currentUser", JSON.stringify(data));
       //route to user home
