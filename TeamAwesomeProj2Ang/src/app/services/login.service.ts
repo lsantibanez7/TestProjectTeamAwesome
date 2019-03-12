@@ -21,6 +21,8 @@ export class LoginService {
   send(username: string, password: string){
    let obs = this._http.post<any>(this.url,{username : username, password : password })
   .subscribe(data => {
+    console.log("What is this stuff");
+    console.log(this.url);
     console.log("log stuff",data)
     if(data == null){
       console.error("null object");
