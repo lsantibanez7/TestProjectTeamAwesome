@@ -26,7 +26,7 @@ public class CorsFilter implements Filter {
 		
 		// In order for us to accept requests from other domains, we need to add two request headers
 		// First being, 'Access-Control-Allow-Origin' with the value being the domain you are requesting from
-		httpResponse.addHeader("Access-Control-Allow-Origin", "http://52.15.180.249:8080");
+		httpResponse.addHeader("Access-Control-Allow-Origin", "http://3.16.181.126:8080");
 		//httpResponse.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 		//httpRequest.add
 
