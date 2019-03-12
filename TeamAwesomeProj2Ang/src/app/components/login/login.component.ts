@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService) {}
 
   onSubmit() {
+    console.log("before the service",this.User);
     this.loginService.send( this.User.username, this.User.password);
   }
 
