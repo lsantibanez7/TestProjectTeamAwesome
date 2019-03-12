@@ -13,6 +13,7 @@ export class RegistrationService {
   constructor(private _router: Router, private _http: HttpClient) { }
   send(username: string, email:string, password:string ){
     console.log(username);
+    console.log(this.url);
     let obs= this._http.post<any>(this.url,{username: username, email:email, password:password})
     .subscribe(data => {
       console.log(data);
