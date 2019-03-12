@@ -29,7 +29,10 @@ export class LoginService {
       //MADE BY MARIA
       console.log(data)
       //store active user
-      localStorage.setItem("currentUser", JSON.stringify(data));
+      localStorage.setItem("currentUser", username);
+      localStorage.setItem("currentUser", password);
+      console.log("local", localStorage);
+      //localStorage.setItem("currentUser", JSON.stringify(data));
       //route to user home
       this._router.navigate(["/tempuserhome"])
     }
