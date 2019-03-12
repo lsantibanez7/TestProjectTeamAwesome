@@ -22,16 +22,14 @@ export class LoginService {
    let obs = this._http.post<any>(this.url,{username : username, password : password })
   .subscribe(data => {
     console.log(this.url);
-    console.log("log stuff", username, password);
-    if(username == null){
+    if(data == null){
       console.error("null object");
     }else{
       //MADE BY MARIA
       console.log(data)
       //store active user
-      localStorage.setItem("currentUser", username);
+      localStorage.setItem("currentUser", JSON.stringify(data));
       console.log("local", localStorage);
-      //localStorage.setItem("currentUser", JSON.stringify(data));
       //route to user home
       this._router.navigate(["/tempuserhome"])
     }

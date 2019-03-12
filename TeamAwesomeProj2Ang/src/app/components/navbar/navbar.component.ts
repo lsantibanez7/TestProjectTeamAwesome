@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   onSubmit() {
-    console.log(this.User);
+    console.log("user",this.User);
     this.loginService.send(this.User.username, this.User.password)
   }
 
